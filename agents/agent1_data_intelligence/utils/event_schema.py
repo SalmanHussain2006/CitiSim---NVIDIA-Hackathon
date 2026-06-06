@@ -92,14 +92,17 @@ def create_event(
     coords = coordinates or {}
     location_id = to_location_id(location)
     when = start_time or now_iso()
+    event_id = make_event_id(dedup_key)
+    impact_score = severity_to_impact(severity)
 
     return {
         # ---- canonical contract (what Agent 2 reads) ----
-        "event_id": make_event_id(dedup_key),
+        "id": event_id,
+        "event_id": event_id,
         "event_type": str(event_type),
         "location_id": location_id,
         "start_time": when,
-        "impact_score": severity_to_impact(severity),
+        "impact_score": impact_score,
         "duration_minutes": duration_minutes if duration_minutes is not None else estimate_duration(event_type),
         "confidence": float(confidence),
 
@@ -112,11 +115,11 @@ def create_event(
         "data": data,
         "processed_by": [],
 
-        # ---- compatibility aliases (so this dict fits storage whatever its columns are) ----
+        # ---- compatibility aliases ----
         "source": source_agent,
         "category": str(event_type),
         "description": summary,
-        "value": severity_to_impact(severity),
+        "value": impact_score,
         "latitude": coords.get("lat"),
         "longitude": coords.get("lon"),
         "location_name": location,
