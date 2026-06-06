@@ -4,11 +4,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from dataclasses import asdict
 from pathlib import Path
 
 import pandas as pd
 
+BASE = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(BASE))
+
+from storage import init_db, recent_events
 from agents.agent2_relationship_discovery.agent2 import DEMO_EVENTS, run_agent2
 from agents.agent3_forecast_simulation.congestion_forecaster import (
     adapt_agent_events,
@@ -17,7 +22,6 @@ from agents.agent3_forecast_simulation.congestion_forecaster import (
 )
 
 
-BASE = Path(__file__).resolve().parents[2]
 EVENT_DIR = BASE / "data" / "events"
 
 
@@ -31,18 +35,57 @@ def _read_json(path: Path):
 def latest_agent1_batch() -> Path | None:
     if not EVENT_DIR.exists():
         return None
-    batches = sorted(EVENT_DIR.glob("agent1_events_*.json"), key=lambda path: path.stat().st_mtime)
+    batches = sorted(
+        EVENT_DIR.glob("agent1_events_*.json"),
+        key=lambda path: path.stat().st_mtime,
+    )
     return batches[-1] if batches else None
 
 
+def load_postgres_records(limit: int = 500) -> list[dict]:
+    """Load the latest event records from the shared Postgres event store."""
+
+    try:
+        conn = init_db()
+        try:
+            records = recent_events(conn, limit=limit)
+        finally:
+            conn.close()
+
+        if records:
+            print(f"Loaded {len(records)} events from Postgres", file=sys.stderr)
+            return records
+
+    except Exception as error:
+        print(f"Postgres load failed, falling back to JSON/demo data: {error}", file=sys.stderr)
+
+    return []
+
+
 def load_event_records(path: str | None = None):
+    """
+    Load event records for Agent 3.
+
+    Priority:
+    1. Explicit input JSON path
+    2. Postgres shared event store
+    3. Latest Agent 1 JSON batch
+    4. Agent 2 demo events
+    """
+
     if path:
         return _read_json(Path(path))
 
+    postgres_records = load_postgres_records(limit=500)
+    if postgres_records:
+        return postgres_records
+
     latest = latest_agent1_batch()
     if latest:
+        print(f"Loaded fallback Agent 1 batch: {latest}", file=sys.stderr)
         return _read_json(latest)
 
+    print("Using Agent 2 demo events", file=sys.stderr)
     return DEMO_EVENTS
 
 
@@ -51,14 +94,19 @@ def run_agent3(
     *,
     horizon_hours: int = 24,
     scenario: str = "baseline",
-    scenario_location: str = "liverpool_street",
+    scenario_location: str = "Liverpool Street",
     relationship_graph: dict | None = None,
 ) -> dict:
     """Run future impact forecasting from event records."""
 
     base_records = records if records is not None else load_event_records()
+
     normalized_records = adapt_agent_events(base_records).to_dict(orient="records")
-    relationship_graph = relationship_graph or run_agent2(normalized_records, min_active_buckets=1)
+
+    relationship_graph = relationship_graph or run_agent2(
+        normalized_records,
+        min_active_buckets=1,
+    )
 
     scenario_events = []
     if scenario != "baseline":
@@ -75,37 +123,50 @@ def run_agent3(
         scenario_events=scenario_events,
         scenario_name=scenario,
     )
+
     payload = asdict(result)
     payload["relationship_summary"] = {
         "node_count": relationship_graph.get("metadata", {}).get("node_count"),
         "edge_count": relationship_graph.get("metadata", {}).get("edge_count"),
         "top_insights": relationship_graph.get("insights", [])[:3],
     }
+
     return payload
 
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Urban Pulse Agent 3 forecast and simulation")
-    parser.add_argument("--input", help="Optional Agent 1 event batch JSON. Uses latest data/events batch when omitted.")
+    parser.add_argument(
+        "--input",
+        help="Optional Agent 1 event batch JSON. Uses Postgres when omitted.",
+    )
     parser.add_argument("--output", help="Optional path to write forecast JSON.")
     parser.add_argument("--horizon-hours", type=int, default=24)
     parser.add_argument(
         "--scenario",
         default="baseline",
-        choices=["baseline", "roadworks", "heavy_rain", "office_development", "station_disruption"],
+        choices=[
+            "baseline",
+            "roadworks",
+            "heavy_rain",
+            "office_development",
+            "station_disruption",
+        ],
     )
-    parser.add_argument("--scenario-location", default="liverpool_street")
+    parser.add_argument("--scenario-location", default="Liverpool Street")
     return parser
 
 
 def main() -> None:
     args = _parser().parse_args()
+
     payload = run_agent3(
         load_event_records(args.input),
         horizon_hours=args.horizon_hours,
         scenario=args.scenario,
         scenario_location=args.scenario_location,
     )
+
     text = json.dumps(payload, indent=2)
 
     if args.output:
@@ -118,5 +179,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-# testing
