@@ -1,0 +1,26 @@
+{
+  "id": "evt_ee142b2fd1",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "location_monitoring_snapshot",
+  "timestamp": "2026-06-06T12:30:07.865363+00:00",
+  "location": "Farringdon",
+  "coordinates": {
+    "lat": 51.5203,
+    "lon": -0.1053
+  },
+  "severity": "low",
+  "confidence": 1.0,
+  "summary": "Agent 1 is actively monitoring Farringdon.",
+  "data": {
+    "location_profile": {
+      "lat": 51.5203,
+      "lon": -0.1053,
+      "keywords": [
+        "farringdon",
+        "smithfield",
+        "charterhouse"
+      ]
+    }
+  },
+  "processed_by": []
+}

@@ -1,0 +1,22 @@
+{
+  "id": "evt_7223b6be67",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "city_event_pressure",
+  "timestamp": "2026-06-06T12:30:13.536996+00:00",
+  "location": "Bank",
+  "coordinates": {
+    "lat": 51.5133,
+    "lon": -0.089
+  },
+  "severity": "high",
+  "confidence": 0.78,
+  "summary": "Major City Event may increase movement pressure around Bank.",
+  "data": {
+    "name": "Major City Event",
+    "location": "Bank",
+    "timestamp": "2026-06-06T12:30:13.535876+00:00",
+    "expected_attendance": 8000,
+    "category": "public_event"
+  },
+  "processed_by": []
+}

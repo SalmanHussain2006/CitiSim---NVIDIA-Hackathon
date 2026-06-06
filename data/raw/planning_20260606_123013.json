@@ -1,0 +1,16 @@
+[
+  {
+    "location": "Liverpool Street",
+    "timestamp": "2026-06-06T12:30:13.536996+00:00",
+    "project_type": "office_development",
+    "impact": "high",
+    "description": "Large office development expected to increase weekday footfall."
+  },
+  {
+    "location": "Farringdon",
+    "timestamp": "2026-06-06T12:30:13.536996+00:00",
+    "project_type": "public_realm_upgrade",
+    "impact": "medium",
+    "description": "Street environment works may temporarily affect pedestrian routes."
+  }
+]
