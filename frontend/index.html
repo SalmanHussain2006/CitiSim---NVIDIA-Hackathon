@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CitiPulse</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workbench">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Urban Pulse</p>
+            <h1>City impact simulator</h1>
+          </div>
+          <div class="status" id="status">Ready</div>
+        </header>
+
+        <form class="promptbar" id="simulate-form">
+          <input
+            id="prompt"
+            name="prompt"
+            type="text"
+            autocomplete="off"
+            value="What happens if Oxford Circus gets pedestrianised?"
+            aria-label="Simulation prompt"
+          />
+          <button type="submit">Simulate</button>
+        </form>
+
+        <section class="summary-grid">
+          <article class="panel outcome">
+            <p class="label">Outcome</p>
+            <h2 id="headline">Run a simulation to see the forecast.</h2>
+            <p id="summary">Agent 3 will forecast future congestion, footfall, cycle demand, and air quality changes.</p>
+          </article>
+
+          <article class="panel metrics">
+            <div>
+              <span>Congestion</span>
+              <strong id="metric-congestion">--</strong>
+            </div>
+            <div>
+              <span>Footfall</span>
+              <strong id="metric-footfall">--</strong>
+            </div>
+            <div>
+              <span>Air quality</span>
+              <strong id="metric-air">--</strong>
+            </div>
+            <div>
+              <span>Cycle demand</span>
+              <strong id="metric-cycle">--</strong>
+            </div>
+          </article>
+        </section>
+
+        <section class="forecast-layout">
+          <article class="panel chart-panel">
+            <div class="section-head">
+              <div>
+                <p class="label">Future Forecast</p>
+                <h2 id="chart-title">Potential change by hour</h2>
+              </div>
+            </div>
+            <canvas id="forecast-chart" width="900" height="360"></canvas>
+            <div class="legend">
+              <span><i class="c1"></i>Congestion</span>
+              <span><i class="c2"></i>Footfall</span>
+              <span><i class="c3"></i>Air quality</span>
+              <span><i class="c4"></i>Cycle demand</span>
+            </div>
+          </article>
+
+          <aside class="side-stack">
+            <article class="panel">
+              <p class="label">Alerts</p>
+              <div id="alerts" class="list muted">No alerts yet.</div>
+            </article>
+            <article class="panel">
+              <p class="label">Suggested Actions</p>
+              <div id="recommendations" class="list muted">Suggestions will appear after simulation.</div>
+            </article>
+          </aside>
+        </section>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

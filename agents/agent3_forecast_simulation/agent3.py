@@ -13,7 +13,6 @@ import pandas as pd
 BASE = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(BASE))
 
-from storage import init_db, recent_events
 from agents.agent2_relationship_discovery.agent2 import DEMO_EVENTS, run_agent2
 from agents.agent3_forecast_simulation.congestion_forecaster import (
     adapt_agent_events,
@@ -46,6 +45,8 @@ def load_postgres_records(limit: int = 500) -> list[dict]:
     """Load the latest event records from the shared Postgres event store."""
 
     try:
+        from storage import init_db, recent_events
+
         conn = init_db()
         try:
             records = recent_events(conn, limit=limit)
