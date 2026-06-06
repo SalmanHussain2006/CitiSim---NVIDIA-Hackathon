@@ -1,7 +1,13 @@
 import json
+import sys
 import time
 from pathlib import Path
 from datetime import datetime, timezone
+
+BASE = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(BASE))
+
+from storage import Event, init_db, upsert_event
 
 from agents.agent1_data_intelligence.connectors.tfl import pull_road_disruptions, pull_line_status
 from agents.agent1_data_intelligence.connectors.weather import pull_weather
@@ -16,7 +22,6 @@ from agents.agent1_data_intelligence.utils.location_matcher import (
     get_location_coordinates,
 )
 
-BASE = Path(__file__).resolve().parents[2]
 RAW_DIR = BASE / "data" / "raw"
 EVENT_DIR = BASE / "data" / "events"
 
@@ -57,6 +62,7 @@ def analyse_road_disruptions(items):
 
         events.append(
             create_event(
+                dedup_key=item.get("id"),      # <-- ADD HERE
                 event_type="road_disruption",
                 location=location,
                 coordinates=get_location_coordinates(location),
@@ -70,7 +76,6 @@ def analyse_road_disruptions(items):
                 },
             )
         )
-
     return events
 
 
@@ -361,7 +366,49 @@ def run_once():
         event_path.write_text(json.dumps(event, indent=2), encoding="utf-8")
 
     print(f"Saved {len(events)} events to {batch_path}")
-    return events
+
+    # Write events into Postgres
+    conn = init_db()
+    stored = 0
+
+    severity_to_score = {
+        "low": 0.25,
+        "medium": 0.55,
+        "high": 0.85,
+        "critical": 1.0,
+    }
+
+    for event in events:
+        try:
+            storage_event = Event(
+                event_id=event.get("event_id") or event.get("id"),
+                event_type=event.get("event_type", "unknown"),
+                location_id=event.get("location") or event.get("location_id", "unknown"),
+                start_time=datetime.now(timezone.utc),
+                impact_score=severity_to_score.get(
+                    str(event.get("severity", "medium")).lower(),
+                    0.55,
+                ),
+                duration_minutes=int(event.get("duration_minutes", 60)),
+                confidence=float(event.get("confidence", 0.7)),
+                source=event.get("source", "agent1_data_intelligence"),
+                description=event.get("summary", ""),
+                latitude=(event.get("coordinates") or {}).get("lat"),
+                longitude=(event.get("coordinates") or {}).get("lon"),
+                raw=event,
+            )
+
+            upsert_event(conn, storage_event)
+            stored += 1
+
+        except Exception as error:
+            print(
+                f"Storage write failed for "
+                f"{event.get('event_id', event.get('id', 'unknown'))}: {error}"
+            )
+
+    conn.close()
+    print(f"Upserted {stored}/{len(events)} events into Postgres")
 
 
 def run_loop(minutes=5):
@@ -373,3 +420,4 @@ def run_loop(minutes=5):
 
 if __name__ == "__main__":
     run_once()
+# testing
