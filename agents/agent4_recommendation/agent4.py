@@ -9,7 +9,7 @@ sys.path.insert(0, str(BASE))
 
 from storage import init_db, recent_events
 from agents.agent3_forecast_simulation.agent3 import run_agent3
-
+from agents.agent4_recommendation.agent4_nemotron import generate_nemotron_recommendations
 EVENT_DIR = BASE / "data" / "events"
 OUTPUT_DIR = BASE / "data" / "recommendations"
 
@@ -339,6 +339,10 @@ def run_once():
 
     except Exception as error:
         print(f"Agent 3 forecast recommendations failed: {error}")
+
+    nemotron_recommendations = generate_nemotron_recommendations(events)
+    recommendations.extend(nemotron_recommendations)
+    print(f"Generated {len(nemotron_recommendations)} Nemotron recommendations")
 
     print(f"Generated {len(recommendations)} total recommendations")
 
