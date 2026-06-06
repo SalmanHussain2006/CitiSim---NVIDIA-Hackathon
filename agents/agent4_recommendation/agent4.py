@@ -1,10 +1,15 @@
 import json
+import sys
 from pathlib import Path
 from datetime import datetime, timezone
 from collections import defaultdict
 
-
 BASE = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(BASE))
+
+from storage import init_db, recent_events
+from agents.agent3_forecast_simulation.agent3 import run_agent3
+
 EVENT_DIR = BASE / "data" / "events"
 OUTPUT_DIR = BASE / "data" / "recommendations"
 
@@ -15,7 +20,37 @@ def now_iso():
     return datetime.now(timezone.utc).isoformat()
 
 
-def load_events():
+def score_to_severity(score):
+    try:
+        score = float(score)
+    except Exception:
+        return "medium"
+
+    if score >= 0.85:
+        return "high"
+    if score >= 0.55:
+        return "medium"
+    return "low"
+
+
+def db_row_to_agent4_event(row):
+    event_id = row.get("event_id")
+
+    return {
+        "id": event_id,
+        "event_id": event_id,
+        "event_type": row.get("event_type", "unknown"),
+        "location": row.get("location_id", "Unknown"),
+        "severity": score_to_severity(row.get("impact_score")),
+        "confidence": row.get("confidence", 0.7),
+        "summary": f"{row.get('event_type', 'unknown')} detected at {row.get('location_id', 'Unknown')}",
+        "start_time": str(row.get("start_time")),
+        "duration_minutes": row.get("duration_minutes", 60),
+        "impact_score": row.get("impact_score", 0.55),
+    }
+
+
+def load_latest_agent1_batch():
     batch_files = sorted(
         EVENT_DIR.glob("agent1_events_*.json"),
         key=lambda path: path.stat().st_mtime,
@@ -26,13 +61,30 @@ def load_events():
         return []
 
     latest_file = batch_files[0]
-    print(f"Using latest Agent 1 batch: {latest_file.name}")
+    print(f"Fallback: using latest Agent 1 batch: {latest_file.name}")
 
     try:
         return json.loads(latest_file.read_text(encoding="utf-8"))
     except Exception as error:
         print(f"Failed to load latest event batch: {error}")
         return []
+
+
+def load_events(limit=500):
+    try:
+        conn = init_db()
+        try:
+            rows = recent_events(conn, limit=limit)
+        finally:
+            conn.close()
+
+        events = [db_row_to_agent4_event(row) for row in rows]
+        print(f"Loaded {len(events)} events from Postgres")
+        return events
+
+    except Exception as error:
+        print(f"Postgres load failed: {error}")
+        return load_latest_agent1_batch()
 
 
 def group_by_location(events):
@@ -66,7 +118,7 @@ def make_recommendation(
         "action": action,
         "reasoning": reasoning,
         "predicted_outcome": predicted_outcome,
-        "source_event_ids": [e.get("id") for e in source_events],
+        "source_event_ids": [e.get("id") or e.get("event_id") for e in source_events],    
     }
 
 
@@ -205,6 +257,51 @@ def generate_recommendations(events):
 
     return recommendations
 
+def generate_forecast_recommendations(forecast_payload):
+    recommendations = []
+    seen = set()
+
+    for alert in forecast_payload.get("alerts", []):
+        location_id = alert.get("location_id", "unknown")
+        outcome = alert.get("outcome", "risk")
+        risk_score = alert.get("risk_score", 0)
+        risk_level = alert.get("risk_level", "medium")
+
+        key = (location_id, outcome)
+        if key in seen:
+            continue
+        seen.add(key)
+
+        location = location_id.replace("_", " ").title()
+
+        recommendations.append(
+            {
+                "id": f"rec_forecast_{location_id}_{outcome}",
+                "source_agent": "agent_4_recommendation",
+                "timestamp": now_iso(),
+                "location": location,
+                "priority": "high" if risk_level == "high" else "medium",
+                "recommendation_type": f"forecast_{outcome}",
+                "title": f"Forecasted {outcome.replace('_', ' ')} risk near {location}",
+                "action": "Prioritise this location for operational monitoring and prepare mitigation measures.",
+                "reasoning": [
+                    f"Agent 3 forecasted a {risk_level} {outcome.replace('_', ' ')} risk.",
+                    f"Forecast risk score: {risk_score}",
+                    "This recommendation is based on simulated future impact, not only current events.",
+                ],
+                "predicted_outcome": {
+                    "forecast_risk_score": risk_score,
+                    "forecast_risk_level": risk_level,
+                    "forecast_time": alert.get("time"),
+                },
+                "source_event_ids": [],
+            }
+        )
+
+        if len(recommendations) >= 8:
+            break
+
+    return recommendations
 
 def save_recommendations(recommendations):
     output = {
@@ -226,7 +323,24 @@ def run_once():
     print(f"Loaded {len(events)} events")
 
     recommendations = generate_recommendations(events)
-    print(f"Generated {len(recommendations)} recommendations")
+    print(f"Generated {len(recommendations)} rule-based recommendations")
+
+    try:
+        forecast_payload = run_agent3(
+            records=events,
+            horizon_hours=6,
+            scenario="baseline",
+        )
+
+        forecast_recommendations = generate_forecast_recommendations(forecast_payload)
+        recommendations.extend(forecast_recommendations)
+
+        print(f"Generated {len(forecast_recommendations)} forecast-based recommendations from Agent 3")
+
+    except Exception as error:
+        print(f"Agent 3 forecast recommendations failed: {error}")
+
+    print(f"Generated {len(recommendations)} total recommendations")
 
     path = save_recommendations(recommendations)
     print(f"Saved recommendations to {path}")
