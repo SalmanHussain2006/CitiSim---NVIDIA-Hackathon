@@ -114,7 +114,7 @@ DEMO_EVENTS = [
 def run_agent2(records: Iterable[Mapping] | None = None, **graph_options) -> dict:
     """Run relationship discovery and return a JSON-serializable payload."""
 
-    frame = dataframe_from_records(records or DEMO_EVENTS)
+    frame = dataframe_from_records(DEMO_EVENTS if records is None else records)
     graph = build_relationship_graph(frame, **graph_options)
     payload = asdict(graph)
     payload["metadata"]["dataframe_backend"] = dataframe_backend()

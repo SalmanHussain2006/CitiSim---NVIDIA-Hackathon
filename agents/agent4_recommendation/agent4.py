@@ -7,13 +7,10 @@ from collections import defaultdict
 BASE = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(BASE))
 
-from storage import init_db, recent_events
 from agents.agent3_forecast_simulation.agent3 import run_agent3
 from agents.agent4_recommendation.agent4_nemotron import generate_nemotron_recommendations
 EVENT_DIR = BASE / "data" / "events"
 OUTPUT_DIR = BASE / "data" / "recommendations"
-
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def now_iso():
@@ -72,6 +69,8 @@ def load_latest_agent1_batch():
 
 def load_events(limit=500):
     try:
+        from storage import init_db, recent_events
+
         conn = init_db()
         try:
             rows = recent_events(conn, limit=limit)
@@ -304,6 +303,8 @@ def generate_forecast_recommendations(forecast_payload):
     return recommendations
 
 def save_recommendations(recommendations):
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
     output = {
         "generated_at": now_iso(),
         "source_agent": "agent_4_recommendation",
