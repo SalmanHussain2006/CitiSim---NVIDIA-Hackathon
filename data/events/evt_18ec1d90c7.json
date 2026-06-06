@@ -1,0 +1,25 @@
+{
+  "id": "evt_18ec1d90c7",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "location_monitoring_snapshot",
+  "timestamp": "2026-06-06T11:27:34.109966+00:00",
+  "location": "Moorgate",
+  "coordinates": {
+    "lat": 51.5186,
+    "lon": -0.0886
+  },
+  "severity": "low",
+  "confidence": 1.0,
+  "summary": "Agent 1 is actively monitoring Moorgate.",
+  "data": {
+    "location_profile": {
+      "lat": 51.5186,
+      "lon": -0.0886,
+      "keywords": [
+        "moorgate",
+        "london wall"
+      ]
+    }
+  },
+  "processed_by": []
+}

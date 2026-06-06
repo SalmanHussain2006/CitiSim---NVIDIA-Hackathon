@@ -1,0 +1,45 @@
+{
+  "id": "evt_98ea7761e7",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "transport_disruption_risk",
+  "timestamp": "2026-06-06T11:22:04.746072+00:00",
+  "location": "Bank",
+  "coordinates": {
+    "lat": 51.5133,
+    "lon": -0.089
+  },
+  "severity": "medium",
+  "confidence": 0.72,
+  "summary": "Waterloo & City disruption may affect Bank: Planned Closure. Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+  "data": {
+    "line": "Waterloo & City",
+    "status": {
+      "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+      "id": 0,
+      "lineId": "waterloo-city",
+      "statusSeverity": 4,
+      "statusSeverityDescription": "Planned Closure",
+      "reason": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+      "created": "0001-01-01T00:00:00",
+      "validityPeriods": [
+        {
+          "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+          "fromDate": "2026-06-06T03:15:00Z",
+          "toDate": "2026-06-06T22:59:00Z",
+          "isNow": false
+        }
+      ],
+      "disruption": {
+        "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+        "category": "Information",
+        "categoryDescription": "Information",
+        "description": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+        "created": "2026-01-04T01:21:00Z",
+        "affectedRoutes": [],
+        "affectedStops": [],
+        "closureText": "plannedClosure"
+      }
+    }
+  },
+  "processed_by": []
+}

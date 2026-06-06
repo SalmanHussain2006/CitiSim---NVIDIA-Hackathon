@@ -1,0 +1,44 @@
+{
+  "id": "evt_6e49641153",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "transport_disruption_risk",
+  "timestamp": "2026-06-06T11:27:35.407902+00:00",
+  "location": "Tower Hill",
+  "coordinates": {
+    "lat": 51.5098,
+    "lon": -0.0766
+  },
+  "severity": "medium",
+  "confidence": 0.72,
+  "summary": "District disruption may affect Tower Hill: Minor Delays. District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+  "data": {
+    "line": "District",
+    "status": {
+      "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+      "id": 0,
+      "lineId": "district",
+      "statusSeverity": 9,
+      "statusSeverityDescription": "Minor Delays",
+      "reason": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+      "created": "0001-01-01T00:00:00",
+      "validityPeriods": [
+        {
+          "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+          "fromDate": "2026-06-06T11:17:23Z",
+          "toDate": "2026-06-07T00:29:00Z",
+          "isNow": true
+        }
+      ],
+      "disruption": {
+        "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+        "category": "RealTime",
+        "categoryDescription": "RealTime",
+        "description": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+        "affectedRoutes": [],
+        "affectedStops": [],
+        "closureText": "minorDelays"
+      }
+    }
+  },
+  "processed_by": []
+}

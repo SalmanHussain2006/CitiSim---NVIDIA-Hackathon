@@ -1,0 +1,229 @@
+{
+  "id": "evt_33a9e29f25",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "road_disruption",
+  "timestamp": "2026-06-06T11:22:04.065112+00:00",
+  "location": "Bank",
+  "coordinates": {
+    "lat": 51.5133,
+    "lon": -0.089
+  },
+  "severity": "high",
+  "confidence": 0.92,
+  "summary": "Road disruption near Bank: Works. [A3031] Albert Bridge Road (Both directions) at the junction of [A3212] Chelsea Embankment - The bridge is closed for local borough works.",
+  "data": {
+    "match_method": "keyword_match",
+    "raw": {
+      "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+      "id": "TIMS-224034",
+      "url": "/Road/All/Disruption/TIMS-224034",
+      "point": "[-0.167217,51.48322]",
+      "severity": "Serious",
+      "ordinal": 4,
+      "category": "Works",
+      "subCategory": "Borough works",
+      "comments": "[A3031] Albert Bridge Road (Both directions) at the junction of [A3212] Chelsea Embankment - The bridge is closed for local borough works.",
+      "currentUpdate": "Use an alternative route. There are northbound delays on Battersea Bridge Road back to Hyde Lane, and  eastbound on Battersea Church Street to Bollingbroke Walk",
+      "currentUpdateDateTime": "2026-05-28T14:42:00Z",
+      "corridorIds": [],
+      "startDateTime": "2026-02-07T18:59:48Z",
+      "endDateTime": "2026-02-07T23:59:59Z",
+      "lastModifiedTime": "2026-05-28T14:46:06Z",
+      "levelOfInterest": "High",
+      "location": "[A3031] ALBERT BRIDGE ROAD (SW11 ,SW3 ) (Kensington & Chelsea,Wandsworth)",
+      "status": "Active",
+      "geography": {
+        "type": "Point",
+        "coordinates": [
+          -0.167217,
+          51.48322
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.1680866895,
+              51.4835739778
+            ],
+            [
+              -0.1680555348,
+              51.4834435374
+            ],
+            [
+              -0.1669167282,
+              51.4811271329
+            ],
+            [
+              -0.1661777522,
+              51.4793933895
+            ],
+            [
+              -0.1660192267,
+              51.4792486511
+            ],
+            [
+              -0.1657840634,
+              51.4791528106
+            ],
+            [
+              -0.1655080638,
+              51.4791204588
+            ],
+            [
+              -0.1652332461,
+              51.4791565208
+            ],
+            [
+              -0.1650267688,
+              51.4792401253
+            ],
+            [
+              -0.164877468,
+              51.4793622772
+            ],
+            [
+              -0.1648027992,
+              51.4795086955
+            ],
+            [
+              -0.1648114931,
+              51.479662262
+            ],
+            [
+              -0.1655321174,
+              51.4813730189
+            ],
+            [
+              -0.1666996028,
+              51.4837427757
+            ],
+            [
+              -0.1668354231,
+              51.4838773848
+            ],
+            [
+              -0.1670378524,
+              51.4839740126
+            ],
+            [
+              -0.1672815211,
+              51.4840205492
+            ],
+            [
+              -0.167535891,
+              51.4840111621
+            ],
+            [
+              -0.1677144503,
+              51.483967865
+            ],
+            [
+              -0.1679122902,
+              51.4838676002
+            ],
+            [
+              -0.1680417791,
+              51.4837305805
+            ],
+            [
+              -0.1680866895,
+              51.4835739778
+            ]
+          ]
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "streets": [
+        {
+          "$type": "Tfl.Api.Presentation.Entities.Street, Tfl.Api.Presentation.Entities",
+          "name": "[A3031] ALBERT BRIDGE ROAD (SW11 ,SW3 )",
+          "closure": "Closed",
+          "directions": "Both directions",
+          "segments": [
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.166069,51.480855],[-0.165989,51.480692]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.166148,51.481077],[-0.166101,51.48105]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.166101,51.48105],[-0.166069,51.480855]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.167367,51.483574],[-0.16733,51.483498]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.16733,51.483498],[-0.167211,51.483256]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.16625,51.481302],[-0.166148,51.481077]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.165516,51.47957],[-0.165989,51.480692]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.167187,51.483208],[-0.166773,51.482361]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.167211,51.483256],[-0.167187,51.483208]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.166773,51.482361],[-0.16625,51.481302]]",
+              "sourceSystemId": 0
+            }
+          ],
+          "sourceSystemId": 224034,
+          "sourceSystemKey": "TIMS"
+        }
+      ],
+      "isProvisional": false,
+      "hasClosures": false,
+      "roadDisruptionLines": [],
+      "roadDisruptionImpactAreas": [],
+      "recurringSchedules": []
+    }
+  },
+  "processed_by": []
+}

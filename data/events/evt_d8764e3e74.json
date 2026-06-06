@@ -1,0 +1,59 @@
+{
+  "id": "evt_d8764e3e74",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "road_disruption",
+  "timestamp": "2026-06-06T11:22:04.067401+00:00",
+  "location": "Liverpool Street",
+  "coordinates": {
+    "lat": 51.5178,
+    "lon": -0.0823
+  },
+  "severity": "medium",
+  "confidence": 0.92,
+  "summary": "Road disruption near Liverpool Street: Works. [A3] Borough High Street (Southbound) at the junction of [A200] Duke Street Hill - Lane closure in place to facilitate Thames Water works. ",
+  "data": {
+    "match_method": "keyword_match",
+    "raw": {
+      "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+      "id": "TIMS-226370",
+      "url": "/Road/All/Disruption/TIMS-226370",
+      "point": "[-0.08858,51.505943]",
+      "severity": "Minimal",
+      "ordinal": 26,
+      "category": "Works",
+      "subCategory": "Utility works",
+      "comments": "[A3] Borough High Street (Southbound) at the junction of [A200] Duke Street Hill - Lane closure in place to facilitate Thames Water works. ",
+      "currentUpdate": "Delays are possible on approach for the duration of the works.",
+      "currentUpdateDateTime": "2026-05-28T14:03:56Z",
+      "corridorIds": [
+        "bishopsgate cross route",
+        "southern river route"
+      ],
+      "startDateTime": "2026-05-26T08:00:00Z",
+      "endDateTime": "2026-05-28T17:00:00Z",
+      "lastModifiedTime": "2026-05-28T14:04:01Z",
+      "levelOfInterest": "Medium",
+      "location": "[A3] BOROUGH HIGH STREET (SE1 ) (Southwark)",
+      "status": "Active",
+      "geography": {
+        "type": "Point",
+        "coordinates": [
+          -0.08858,
+          51.505943
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "isProvisional": false,
+      "hasClosures": false,
+      "roadDisruptionLines": [],
+      "roadDisruptionImpactAreas": [],
+      "recurringSchedules": []
+    }
+  },
+  "processed_by": []
+}

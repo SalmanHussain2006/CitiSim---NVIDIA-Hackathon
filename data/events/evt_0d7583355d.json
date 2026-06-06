@@ -1,0 +1,214 @@
+{
+  "id": "evt_0d7583355d",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "road_disruption",
+  "timestamp": "2026-06-06T11:27:34.814100+00:00",
+  "location": "Liverpool Street",
+  "coordinates": {
+    "lat": 51.5178,
+    "lon": -0.0823
+  },
+  "severity": "medium",
+  "confidence": 0.92,
+  "summary": "Road disruption near Liverpool Street: Works. [A10] Gracechurch Street (Northbound) between Eastcheap and Fenchurch Street - Road closed to facilitate Vodafone works.",
+  "data": {
+    "match_method": "keyword_match",
+    "distance_km": null,
+    "raw": {
+      "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+      "id": "TIMS-228997",
+      "url": "/Road/All/Disruption/TIMS-228997",
+      "point": "[-0.085833,51.511107]",
+      "severity": "Minimal",
+      "ordinal": 55,
+      "category": "Works",
+      "subCategory": "Utility works",
+      "comments": "[A10] Gracechurch Street (Northbound) between Eastcheap and Fenchurch Street - Road closed to facilitate Vodafone works.",
+      "currentUpdate": "Use an alternative route.  There are no reported delays on diversion routes.",
+      "currentUpdateDateTime": "2026-05-28T13:58:18Z",
+      "corridorIds": [
+        "bishopsgate cross route"
+      ],
+      "startDateTime": "2026-05-26T07:00:00Z",
+      "endDateTime": "2026-05-31T17:00:00Z",
+      "lastModifiedTime": "2026-05-28T14:26:56Z",
+      "levelOfInterest": "Low",
+      "location": "[A10] GRACECHURCH STREET (EC3V ,EC4N ,EC4R ) (City of London)",
+      "status": "Active",
+      "geography": {
+        "type": "Point",
+        "coordinates": [
+          -0.085833,
+          51.511107
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.0867395259,
+              51.5108744106
+            ],
+            [
+              -0.0866884361,
+              51.5107130118
+            ],
+            [
+              -0.0865476801,
+              51.5105739009
+            ],
+            [
+              -0.0863361218,
+              51.5104757205
+            ],
+            [
+              -0.0861347231,
+              51.5104357219
+            ],
+            [
+              -0.0859233889,
+              51.5104339253
+            ],
+            [
+              -0.0857203187,
+              51.5104704855
+            ],
+            [
+              -0.0852972806,
+              51.5106965382
+            ],
+            [
+              -0.0850495255,
+              51.5109055952
+            ],
+            [
+              -0.0847782702,
+              51.5113327428
+            ],
+            [
+              -0.0846257245,
+              51.5114611387
+            ],
+            [
+              -0.0843967569,
+              51.5118007631
+            ],
+            [
+              -0.0844001553,
+              51.5120404765
+            ],
+            [
+              -0.0846005792,
+              51.5122449948
+            ],
+            [
+              -0.0848393258,
+              51.51233749
+            ],
+            [
+              -0.0851166279,
+              51.5123659354
+            ],
+            [
+              -0.0853902673,
+              51.5123260004
+            ],
+            [
+              -0.085618583,
+              51.512223765
+            ],
+            [
+              -0.0860304595,
+              51.5117911764
+            ],
+            [
+              -0.0863186582,
+              51.5113370575
+            ],
+            [
+              -0.0866581989,
+              51.5110868246
+            ],
+            [
+              -0.0867395259,
+              51.5108744106
+            ]
+          ]
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "streets": [
+        {
+          "$type": "Tfl.Api.Presentation.Entities.Street, Tfl.Api.Presentation.Entities",
+          "name": "[A10] GRACECHURCH STREET (EC3V ,EC4N ,EC4R )",
+          "closure": "Closed",
+          "directions": "Northbound",
+          "segments": [
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085494,51.511431],[-0.085584,51.511286]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085185,51.511784],[-0.085382,51.511595]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085693,51.511108],[-0.086019,51.510879]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085601,51.511241],[-0.085693,51.511108]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085382,51.511595],[-0.085494,51.511431]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085093,51.511917],[-0.085185,51.511784]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085584,51.511286],[-0.085601,51.511241]]",
+              "sourceSystemId": 0
+            }
+          ],
+          "sourceSystemId": 228997,
+          "sourceSystemKey": "TIMS"
+        }
+      ],
+      "isProvisional": false,
+      "hasClosures": false,
+      "roadDisruptionLines": [],
+      "roadDisruptionImpactAreas": [],
+      "recurringSchedules": []
+    }
+  },
+  "processed_by": []
+}

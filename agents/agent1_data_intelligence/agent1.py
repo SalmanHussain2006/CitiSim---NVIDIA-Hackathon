@@ -62,7 +62,7 @@ def analyse_road_disruptions(items):
     events = []
 
     for item in items:
-        location, confidence, match_method = match_location(item)
+        location, confidence, match_method, distance_km = match_location(item)
 
         if not location:
             continue
@@ -89,6 +89,7 @@ def analyse_road_disruptions(items):
                 summary=f"Road disruption near {location}: {category}. {description}",
                 data={
                     "match_method": match_method,
+                    "distance_km": distance_km,
                     "raw": item,
                 },
             )

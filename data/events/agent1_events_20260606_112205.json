@@ -1,0 +1,2268 @@
+[
+  {
+    "id": "evt_a6d781547f",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "location_monitoring_snapshot",
+    "timestamp": "2026-06-06T11:22:03.367271+00:00",
+    "location": "Liverpool Street",
+    "coordinates": {
+      "lat": 51.5178,
+      "lon": -0.0823
+    },
+    "severity": "low",
+    "confidence": 1.0,
+    "summary": "Agent 1 is actively monitoring Liverpool Street.",
+    "data": {
+      "location_profile": {
+        "lat": 51.5178,
+        "lon": -0.0823,
+        "keywords": [
+          "liverpool street",
+          "bishopsgate",
+          "broadgate"
+        ]
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_54f8f44f6e",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "location_monitoring_snapshot",
+    "timestamp": "2026-06-06T11:22:03.367306+00:00",
+    "location": "Farringdon",
+    "coordinates": {
+      "lat": 51.5203,
+      "lon": -0.1053
+    },
+    "severity": "low",
+    "confidence": 1.0,
+    "summary": "Agent 1 is actively monitoring Farringdon.",
+    "data": {
+      "location_profile": {
+        "lat": 51.5203,
+        "lon": -0.1053,
+        "keywords": [
+          "farringdon",
+          "smithfield",
+          "charterhouse"
+        ]
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_a35620c9cd",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "location_monitoring_snapshot",
+    "timestamp": "2026-06-06T11:22:03.367317+00:00",
+    "location": "Bank",
+    "coordinates": {
+      "lat": 51.5133,
+      "lon": -0.089
+    },
+    "severity": "low",
+    "confidence": 1.0,
+    "summary": "Agent 1 is actively monitoring Bank.",
+    "data": {
+      "location_profile": {
+        "lat": 51.5133,
+        "lon": -0.089,
+        "keywords": [
+          "bank",
+          "threadneedle",
+          "poultry",
+          "queen victoria street"
+        ]
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_34c492dec3",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "location_monitoring_snapshot",
+    "timestamp": "2026-06-06T11:22:03.367325+00:00",
+    "location": "Moorgate",
+    "coordinates": {
+      "lat": 51.5186,
+      "lon": -0.0886
+    },
+    "severity": "low",
+    "confidence": 1.0,
+    "summary": "Agent 1 is actively monitoring Moorgate.",
+    "data": {
+      "location_profile": {
+        "lat": 51.5186,
+        "lon": -0.0886,
+        "keywords": [
+          "moorgate",
+          "london wall"
+        ]
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_badb8c9c62",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "location_monitoring_snapshot",
+    "timestamp": "2026-06-06T11:22:03.367333+00:00",
+    "location": "Tower Hill",
+    "coordinates": {
+      "lat": 51.5098,
+      "lon": -0.0766
+    },
+    "severity": "low",
+    "confidence": 1.0,
+    "summary": "Agent 1 is actively monitoring Tower Hill.",
+    "data": {
+      "location_profile": {
+        "lat": 51.5098,
+        "lon": -0.0766,
+        "keywords": [
+          "tower hill",
+          "tower gateway",
+          "tower bridge"
+        ]
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_51064dc2db",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "road_disruption",
+    "timestamp": "2026-06-06T11:22:04.064931+00:00",
+    "location": "Bank",
+    "coordinates": {
+      "lat": 51.5133,
+      "lon": -0.089
+    },
+    "severity": "high",
+    "confidence": 0.92,
+    "summary": "Road disruption near Bank: Works. [A3217] Kings Road (All directions) at the junction of [A3220] Gunter Grove - Temporary signals in operation to facilitate works by UKPN.",
+    "data": {
+      "match_method": "keyword_match",
+      "raw": {
+        "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+        "id": "TIMS-229214",
+        "url": "/Road/All/Disruption/TIMS-229214",
+        "point": "[-0.18328,51.481191]",
+        "severity": "Serious",
+        "ordinal": 2,
+        "category": "Works",
+        "subCategory": "Utility works",
+        "comments": "[A3217] Kings Road (All directions) at the junction of [A3220] Gunter Grove - Temporary signals in operation to facilitate works by UKPN.",
+        "currentUpdate": "Westbound traffic is subject to delays on the approach back to Oakley Street. Gunter Grove has slow moving northbound traffic tailing back intermittently to Cheyne Walk and there are additional delays back along Battersea Bridge and Chelsea Embankment.",
+        "currentUpdateDateTime": "2026-05-28T14:35:56Z",
+        "corridorIds": [],
+        "startDateTime": "2026-05-25T08:30:00Z",
+        "endDateTime": "2026-05-31T11:00:00Z",
+        "lastModifiedTime": "2026-05-28T14:35:56Z",
+        "levelOfInterest": "High",
+        "location": "[A3217] KINGS ROAD (SW10 ,SW3 ,SW6 ) (Hammersmith & Fulham,Kensington & Chelsea)",
+        "status": "Active",
+        "geography": {
+          "type": "Point",
+          "coordinates": [
+            -0.18328,
+            51.481191
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "isProvisional": false,
+        "hasClosures": false,
+        "roadDisruptionLines": [],
+        "roadDisruptionImpactAreas": [],
+        "recurringSchedules": []
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_33a9e29f25",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "road_disruption",
+    "timestamp": "2026-06-06T11:22:04.065112+00:00",
+    "location": "Bank",
+    "coordinates": {
+      "lat": 51.5133,
+      "lon": -0.089
+    },
+    "severity": "high",
+    "confidence": 0.92,
+    "summary": "Road disruption near Bank: Works. [A3031] Albert Bridge Road (Both directions) at the junction of [A3212] Chelsea Embankment - The bridge is closed for local borough works.",
+    "data": {
+      "match_method": "keyword_match",
+      "raw": {
+        "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+        "id": "TIMS-224034",
+        "url": "/Road/All/Disruption/TIMS-224034",
+        "point": "[-0.167217,51.48322]",
+        "severity": "Serious",
+        "ordinal": 4,
+        "category": "Works",
+        "subCategory": "Borough works",
+        "comments": "[A3031] Albert Bridge Road (Both directions) at the junction of [A3212] Chelsea Embankment - The bridge is closed for local borough works.",
+        "currentUpdate": "Use an alternative route. There are northbound delays on Battersea Bridge Road back to Hyde Lane, and  eastbound on Battersea Church Street to Bollingbroke Walk",
+        "currentUpdateDateTime": "2026-05-28T14:42:00Z",
+        "corridorIds": [],
+        "startDateTime": "2026-02-07T18:59:48Z",
+        "endDateTime": "2026-02-07T23:59:59Z",
+        "lastModifiedTime": "2026-05-28T14:46:06Z",
+        "levelOfInterest": "High",
+        "location": "[A3031] ALBERT BRIDGE ROAD (SW11 ,SW3 ) (Kensington & Chelsea,Wandsworth)",
+        "status": "Active",
+        "geography": {
+          "type": "Point",
+          "coordinates": [
+            -0.167217,
+            51.48322
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -0.1680866895,
+                51.4835739778
+              ],
+              [
+                -0.1680555348,
+                51.4834435374
+              ],
+              [
+                -0.1669167282,
+                51.4811271329
+              ],
+              [
+                -0.1661777522,
+                51.4793933895
+              ],
+              [
+                -0.1660192267,
+                51.4792486511
+              ],
+              [
+                -0.1657840634,
+                51.4791528106
+              ],
+              [
+                -0.1655080638,
+                51.4791204588
+              ],
+              [
+                -0.1652332461,
+                51.4791565208
+              ],
+              [
+                -0.1650267688,
+                51.4792401253
+              ],
+              [
+                -0.164877468,
+                51.4793622772
+              ],
+              [
+                -0.1648027992,
+                51.4795086955
+              ],
+              [
+                -0.1648114931,
+                51.479662262
+              ],
+              [
+                -0.1655321174,
+                51.4813730189
+              ],
+              [
+                -0.1666996028,
+                51.4837427757
+              ],
+              [
+                -0.1668354231,
+                51.4838773848
+              ],
+              [
+                -0.1670378524,
+                51.4839740126
+              ],
+              [
+                -0.1672815211,
+                51.4840205492
+              ],
+              [
+                -0.167535891,
+                51.4840111621
+              ],
+              [
+                -0.1677144503,
+                51.483967865
+              ],
+              [
+                -0.1679122902,
+                51.4838676002
+              ],
+              [
+                -0.1680417791,
+                51.4837305805
+              ],
+              [
+                -0.1680866895,
+                51.4835739778
+              ]
+            ]
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "streets": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.Street, Tfl.Api.Presentation.Entities",
+            "name": "[A3031] ALBERT BRIDGE ROAD (SW11 ,SW3 )",
+            "closure": "Closed",
+            "directions": "Both directions",
+            "segments": [
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.166069,51.480855],[-0.165989,51.480692]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.166148,51.481077],[-0.166101,51.48105]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.166101,51.48105],[-0.166069,51.480855]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.167367,51.483574],[-0.16733,51.483498]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.16733,51.483498],[-0.167211,51.483256]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.16625,51.481302],[-0.166148,51.481077]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.165516,51.47957],[-0.165989,51.480692]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.167187,51.483208],[-0.166773,51.482361]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.167211,51.483256],[-0.167187,51.483208]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.166773,51.482361],[-0.16625,51.481302]]",
+                "sourceSystemId": 0
+              }
+            ],
+            "sourceSystemId": 224034,
+            "sourceSystemKey": "TIMS"
+          }
+        ],
+        "isProvisional": false,
+        "hasClosures": false,
+        "roadDisruptionLines": [],
+        "roadDisruptionImpactAreas": [],
+        "recurringSchedules": []
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_d4c83c611f",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "road_disruption",
+    "timestamp": "2026-06-06T11:22:04.066375+00:00",
+    "location": "Liverpool Street",
+    "coordinates": {
+      "lat": 51.5178,
+      "lon": -0.0823
+    },
+    "severity": "medium",
+    "confidence": 0.92,
+    "summary": "Road disruption near Liverpool Street: Works. King William Street (Southbound) at the junction of Lombard Street - Road closed to facilitate highway authority works.",
+    "data": {
+      "match_method": "keyword_match",
+      "raw": {
+        "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+        "id": "TIMS-200007",
+        "url": "/Road/All/Disruption/TIMS-200007",
+        "point": "[-0.087718,51.512021]",
+        "severity": "Moderate",
+        "ordinal": 12,
+        "category": "Works",
+        "subCategory": "Borough works",
+        "comments": "King William Street (Southbound) at the junction of Lombard Street - Road closed to facilitate highway authority works.",
+        "currentUpdate": "Use an alternative route. Delays are possible on diversion.",
+        "currentUpdateDateTime": "2026-05-28T14:31:06Z",
+        "corridorIds": [
+          "bishopsgate cross route"
+        ],
+        "startDateTime": "2024-07-08T07:00:00Z",
+        "endDateTime": "2026-11-01T18:00:00Z",
+        "lastModifiedTime": "2026-05-28T14:31:24Z",
+        "levelOfInterest": "High",
+        "location": "KING WILLIAM STREET (EC3V,EC4N,EC4R) (City of London)",
+        "status": "Active",
+        "geography": {
+          "type": "Point",
+          "coordinates": [
+            -0.087718,
+            51.512021
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -0.0891778645,
+                51.5128805527
+              ],
+              [
+                -0.0890172242,
+                51.5125200354
+              ],
+              [
+                -0.0874801776,
+                51.5106900431
+              ],
+              [
+                -0.0872453036,
+                51.5105730268
+              ],
+              [
+                -0.0867677274,
+                51.51046977
+              ],
+              [
+                -0.0864870754,
+                51.510478646
+              ],
+              [
+                -0.0862053951,
+                51.5105674595
+              ],
+              [
+                -0.0860636998,
+                51.5106653138
+              ],
+              [
+                -0.0859642518,
+                51.5108058878
+              ],
+              [
+                -0.0859465127,
+                51.5109591496
+              ],
+              [
+                -0.0859981821,
+                51.5110870298
+              ],
+              [
+                -0.0861546639,
+                51.5112326769
+              ],
+              [
+                -0.08639087,
+                51.5113304629
+              ],
+              [
+                -0.0878833614,
+                51.5131507153
+              ],
+              [
+                -0.0880131221,
+                51.5132330795
+              ],
+              [
+                -0.0882300323,
+                51.5133058445
+              ],
+              [
+                -0.0884735516,
+                51.5133287601
+              ],
+              [
+                -0.0886565494,
+                51.5133113892
+              ],
+              [
+                -0.0888264081,
+                51.5132654908
+              ],
+              [
+                -0.0890132755,
+                51.5131654043
+              ],
+              [
+                -0.0891351782,
+                51.5130318883
+              ],
+              [
+                -0.0891778645,
+                51.5128805527
+              ]
+            ]
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "streets": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.Street, Tfl.Api.Presentation.Entities",
+            "name": "KING WILLIAM STREET (EC3V,EC4N,EC4R)",
+            "closure": "Closed",
+            "directions": "Southbound",
+            "segments": [
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.088143,51.51247],[-0.088264,51.512631]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.087512,51.511713],[-0.087758,51.512023]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.088403,51.512798],[-0.088458,51.512879]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.087758,51.512023],[-0.087868,51.51215]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.088264,51.512631],[-0.088403,51.512798]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.087375,51.511549],[-0.087512,51.511713]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.086923,51.510975],[-0.087155,51.511294]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.086923,51.510975],[-0.086663,51.510914]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.087155,51.511294],[-0.087375,51.511549]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.087868,51.51215],[-0.088143,51.51247]]",
+                "sourceSystemId": 0
+              }
+            ],
+            "sourceSystemId": 200007,
+            "sourceSystemKey": "TIMS"
+          }
+        ],
+        "isProvisional": false,
+        "hasClosures": false,
+        "roadDisruptionLines": [],
+        "roadDisruptionImpactAreas": [],
+        "recurringSchedules": []
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_4b1dcdb803",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "road_disruption",
+    "timestamp": "2026-06-06T11:22:04.067371+00:00",
+    "location": "Liverpool Street",
+    "coordinates": {
+      "lat": 51.5178,
+      "lon": -0.0823
+    },
+    "severity": "medium",
+    "confidence": 0.92,
+    "summary": "Road disruption near Liverpool Street: Works. [A10] Gracechurch Street (Southbound) between Cornhill and Fenchurch Street - The road is restricted to facilitate building development works.",
+    "data": {
+      "match_method": "keyword_match",
+      "raw": {
+        "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+        "id": "TIMS-225605",
+        "url": "/Road/All/Disruption/TIMS-225605",
+        "point": "[-0.084551,51.512693]",
+        "severity": "Minimal",
+        "ordinal": 25,
+        "category": "Works",
+        "subCategory": "Collaborative works",
+        "comments": "[A10] Gracechurch Street (Southbound) between Cornhill and Fenchurch Street - The road is restricted to facilitate building development works.",
+        "currentUpdate": "Delays are possible. ",
+        "currentUpdateDateTime": "2026-05-28T14:29:05Z",
+        "corridorIds": [
+          "bishopsgate cross route"
+        ],
+        "startDateTime": "2026-03-14T08:00:00Z",
+        "endDateTime": "2028-02-21T07:00:00Z",
+        "lastModifiedTime": "2026-05-28T14:29:40Z",
+        "levelOfInterest": "Medium",
+        "location": "[A10] GRACECHURCH STREET (EC3V ,EC4N ,EC4R ) (City of London)",
+        "status": "Active",
+        "geography": {
+          "type": "Point",
+          "coordinates": [
+            -0.084551,
+            51.512693
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -0.0867395259,
+                51.5108744106
+              ],
+              [
+                -0.086667016,
+                51.5106827495
+              ],
+              [
+                -0.0865102411,
+                51.5105504766
+              ],
+              [
+                -0.0862876812,
+                51.5104622734
+              ],
+              [
+                -0.0860291622,
+                51.51042996
+              ],
+              [
+                -0.0857693283,
+                51.5104578668
+              ],
+              [
+                -0.0855840294,
+                51.5105213015
+              ],
+              [
+                -0.0850944756,
+                51.510857571
+              ],
+              [
+                -0.0847782702,
+                51.5113327428
+              ],
+              [
+                -0.0846257245,
+                51.5114611387
+              ],
+              [
+                -0.0843268552,
+                51.511888551
+              ],
+              [
+                -0.0842502408,
+                51.5121172279
+              ],
+              [
+                -0.0835398502,
+                51.5131143812
+              ],
+              [
+                -0.0835162911,
+                51.5132673379
+              ],
+              [
+                -0.0835630902,
+                51.5133959468
+              ],
+              [
+                -0.0836902009,
+                51.5135275589
+              ],
+              [
+                -0.0838505786,
+                51.5136134632
+              ],
+              [
+                -0.08411302,
+                51.5136761805
+              ],
+              [
+                -0.0843939508,
+                51.5136714587
+              ],
+              [
+                -0.0846506001,
+                51.5136000169
+              ],
+              [
+                -0.084843894,
+                51.5134727318
+              ],
+              [
+                -0.0855936451,
+                51.512445956
+              ],
+              [
+                -0.0857041889,
+                51.512166108
+              ],
+              [
+                -0.0858725432,
+                51.5119245802
+              ],
+              [
+                -0.0860304595,
+                51.5117911764
+              ],
+              [
+                -0.0863186582,
+                51.5113370575
+              ],
+              [
+                -0.0866581989,
+                51.5110868246
+              ],
+              [
+                -0.0867395259,
+                51.5108744106
+              ]
+            ]
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "streets": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.Street, Tfl.Api.Presentation.Entities",
+            "name": "[A10] GRACECHURCH STREET (EC3V ,EC4N ,EC4R )",
+            "closure": "Open",
+            "directions": "Both directions",
+            "segments": [
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.084376,51.513016],[-0.084419,51.512949]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.084984,51.512154],[-0.085093,51.511917]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085494,51.511431],[-0.085584,51.511286]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085185,51.511784],[-0.085382,51.511595]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.084663,51.512623],[-0.084728,51.512536]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085693,51.511108],[-0.086019,51.510879]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085601,51.511241],[-0.085693,51.511108]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085382,51.511595],[-0.085494,51.511431]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.084728,51.512536],[-0.084891,51.512323]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.084419,51.512949],[-0.084511,51.512826]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085093,51.511917],[-0.085185,51.511784]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.084891,51.512323],[-0.084984,51.512154]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.084511,51.512826],[-0.084663,51.512623]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.084138,51.513415],[-0.084376,51.513016]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085584,51.511286],[-0.085601,51.511241]]",
+                "sourceSystemId": 0
+              }
+            ],
+            "sourceSystemId": 225605,
+            "sourceSystemKey": "TIMS"
+          }
+        ],
+        "isProvisional": false,
+        "hasClosures": false,
+        "roadDisruptionLines": [],
+        "roadDisruptionImpactAreas": [],
+        "recurringSchedules": []
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_d8764e3e74",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "road_disruption",
+    "timestamp": "2026-06-06T11:22:04.067401+00:00",
+    "location": "Liverpool Street",
+    "coordinates": {
+      "lat": 51.5178,
+      "lon": -0.0823
+    },
+    "severity": "medium",
+    "confidence": 0.92,
+    "summary": "Road disruption near Liverpool Street: Works. [A3] Borough High Street (Southbound) at the junction of [A200] Duke Street Hill - Lane closure in place to facilitate Thames Water works. ",
+    "data": {
+      "match_method": "keyword_match",
+      "raw": {
+        "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+        "id": "TIMS-226370",
+        "url": "/Road/All/Disruption/TIMS-226370",
+        "point": "[-0.08858,51.505943]",
+        "severity": "Minimal",
+        "ordinal": 26,
+        "category": "Works",
+        "subCategory": "Utility works",
+        "comments": "[A3] Borough High Street (Southbound) at the junction of [A200] Duke Street Hill - Lane closure in place to facilitate Thames Water works. ",
+        "currentUpdate": "Delays are possible on approach for the duration of the works.",
+        "currentUpdateDateTime": "2026-05-28T14:03:56Z",
+        "corridorIds": [
+          "bishopsgate cross route",
+          "southern river route"
+        ],
+        "startDateTime": "2026-05-26T08:00:00Z",
+        "endDateTime": "2026-05-28T17:00:00Z",
+        "lastModifiedTime": "2026-05-28T14:04:01Z",
+        "levelOfInterest": "Medium",
+        "location": "[A3] BOROUGH HIGH STREET (SE1 ) (Southwark)",
+        "status": "Active",
+        "geography": {
+          "type": "Point",
+          "coordinates": [
+            -0.08858,
+            51.505943
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "isProvisional": false,
+        "hasClosures": false,
+        "roadDisruptionLines": [],
+        "roadDisruptionImpactAreas": [],
+        "recurringSchedules": []
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_298b71ef74",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "road_disruption",
+    "timestamp": "2026-06-06T11:22:04.068711+00:00",
+    "location": "Liverpool Street",
+    "coordinates": {
+      "lat": 51.5178,
+      "lon": -0.0823
+    },
+    "severity": "medium",
+    "confidence": 0.92,
+    "summary": "Road disruption near Liverpool Street: Works. [A10] Gracechurch Street (Northbound) between Eastcheap and Fenchurch Street - Road closed to facilitate Vodafone works.",
+    "data": {
+      "match_method": "keyword_match",
+      "raw": {
+        "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+        "id": "TIMS-228997",
+        "url": "/Road/All/Disruption/TIMS-228997",
+        "point": "[-0.085833,51.511107]",
+        "severity": "Minimal",
+        "ordinal": 55,
+        "category": "Works",
+        "subCategory": "Utility works",
+        "comments": "[A10] Gracechurch Street (Northbound) between Eastcheap and Fenchurch Street - Road closed to facilitate Vodafone works.",
+        "currentUpdate": "Use an alternative route.  There are no reported delays on diversion routes.",
+        "currentUpdateDateTime": "2026-05-28T13:58:18Z",
+        "corridorIds": [
+          "bishopsgate cross route"
+        ],
+        "startDateTime": "2026-05-26T07:00:00Z",
+        "endDateTime": "2026-05-31T17:00:00Z",
+        "lastModifiedTime": "2026-05-28T14:26:56Z",
+        "levelOfInterest": "Low",
+        "location": "[A10] GRACECHURCH STREET (EC3V ,EC4N ,EC4R ) (City of London)",
+        "status": "Active",
+        "geography": {
+          "type": "Point",
+          "coordinates": [
+            -0.085833,
+            51.511107
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -0.0867395259,
+                51.5108744106
+              ],
+              [
+                -0.0866884361,
+                51.5107130118
+              ],
+              [
+                -0.0865476801,
+                51.5105739009
+              ],
+              [
+                -0.0863361218,
+                51.5104757205
+              ],
+              [
+                -0.0861347231,
+                51.5104357219
+              ],
+              [
+                -0.0859233889,
+                51.5104339253
+              ],
+              [
+                -0.0857203187,
+                51.5104704855
+              ],
+              [
+                -0.0852972806,
+                51.5106965382
+              ],
+              [
+                -0.0850495255,
+                51.5109055952
+              ],
+              [
+                -0.0847782702,
+                51.5113327428
+              ],
+              [
+                -0.0846257245,
+                51.5114611387
+              ],
+              [
+                -0.0843967569,
+                51.5118007631
+              ],
+              [
+                -0.0844001553,
+                51.5120404765
+              ],
+              [
+                -0.0846005792,
+                51.5122449948
+              ],
+              [
+                -0.0848393258,
+                51.51233749
+              ],
+              [
+                -0.0851166279,
+                51.5123659354
+              ],
+              [
+                -0.0853902673,
+                51.5123260004
+              ],
+              [
+                -0.085618583,
+                51.512223765
+              ],
+              [
+                -0.0860304595,
+                51.5117911764
+              ],
+              [
+                -0.0863186582,
+                51.5113370575
+              ],
+              [
+                -0.0866581989,
+                51.5110868246
+              ],
+              [
+                -0.0867395259,
+                51.5108744106
+              ]
+            ]
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "streets": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.Street, Tfl.Api.Presentation.Entities",
+            "name": "[A10] GRACECHURCH STREET (EC3V ,EC4N ,EC4R )",
+            "closure": "Closed",
+            "directions": "Northbound",
+            "segments": [
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085494,51.511431],[-0.085584,51.511286]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085185,51.511784],[-0.085382,51.511595]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085693,51.511108],[-0.086019,51.510879]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085601,51.511241],[-0.085693,51.511108]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085382,51.511595],[-0.085494,51.511431]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085093,51.511917],[-0.085185,51.511784]]",
+                "sourceSystemId": 0
+              },
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.085584,51.511286],[-0.085601,51.511241]]",
+                "sourceSystemId": 0
+              }
+            ],
+            "sourceSystemId": 228997,
+            "sourceSystemKey": "TIMS"
+          }
+        ],
+        "isProvisional": false,
+        "hasClosures": false,
+        "roadDisruptionLines": [],
+        "roadDisruptionImpactAreas": [],
+        "recurringSchedules": []
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_86c0712d54",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "road_disruption",
+    "timestamp": "2026-06-06T11:22:04.068776+00:00",
+    "location": "Farringdon",
+    "coordinates": {
+      "lat": 51.5203,
+      "lon": -0.1053
+    },
+    "severity": "medium",
+    "confidence": 0.92,
+    "summary": "Road disruption near Farringdon: Works. [A201] London Road (Northbound) at the junction of [A3202] St Georges Circus - The road has been closed to facilitate burst water main repairs.",
+    "data": {
+      "match_method": "keyword_match",
+      "raw": {
+        "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+        "id": "TIMS-229428",
+        "url": "/Road/All/Disruption/TIMS-229428",
+        "point": "[-0.104251,51.498347]",
+        "severity": "Minimal",
+        "ordinal": 56,
+        "category": "Works",
+        "subCategory": "Utility works",
+        "comments": "[A201] London Road (Northbound) at the junction of [A3202] St Georges Circus - The road has been closed to facilitate burst water main repairs.",
+        "currentUpdate": "Seek other routes. Expect delays in the surrounding area.",
+        "currentUpdateDateTime": "2026-05-28T14:05:46Z",
+        "corridorIds": [
+          "farringdon cross route",
+          "inner ring"
+        ],
+        "startDateTime": "2026-05-28T13:00:00Z",
+        "endDateTime": "2026-06-02T18:00:00Z",
+        "lastModifiedTime": "2026-05-28T14:05:46Z",
+        "levelOfInterest": "Low",
+        "location": "[A201] LONDON ROAD (SE1 ) (Southwark)",
+        "status": "Active",
+        "geography": {
+          "type": "Point",
+          "coordinates": [
+            -0.104251,
+            51.498347
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -0.105072852,
+                51.4983272474
+              ],
+              [
+                -0.1050310525,
+                51.4981758167
+              ],
+              [
+                -0.10494704,
+                51.4980729117
+              ],
+              [
+                -0.1041129617,
+                51.4974382897
+              ],
+              [
+                -0.1039497923,
+                51.4973545008
+              ],
+              [
+                -0.1036853979,
+                51.497295227
+              ],
+              [
+                -0.1034047879,
+                51.4973036174
+              ],
+              [
+                -0.1031506819,
+                51.4973783949
+              ],
+              [
+                -0.1029617645,
+                51.4975081753
+              ],
+              [
+                -0.1028588744,
+                51.4977391363
+              ],
+              [
+                -0.102943477,
+                51.4979510483
+              ],
+              [
+                -0.1037956957,
+                51.4986113843
+              ],
+              [
+                -0.1039594565,
+                51.4987031111
+              ],
+              [
+                -0.1043232549,
+                51.4987757312
+              ],
+              [
+                -0.1046953769,
+                51.4987219962
+              ],
+              [
+                -0.1049711058,
+                51.4985570274
+              ],
+              [
+                -0.105072852,
+                51.4983272474
+              ]
+            ]
+          ],
+          "crs": {
+            "type": "name",
+            "properties": {
+              "name": "EPSG:4326"
+            }
+          }
+        },
+        "streets": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.Street, Tfl.Api.Presentation.Entities",
+            "name": "[A201] LONDON ROAD (SE1 )",
+            "closure": "Closed",
+            "directions": "Northbound",
+            "segments": [
+              {
+                "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+                "toid": "0",
+                "lineString": "[[-0.104353,51.498327],[-0.103579,51.49774]]",
+                "sourceSystemId": 0
+              }
+            ],
+            "sourceSystemId": 229428,
+            "sourceSystemKey": "TIMS"
+          }
+        ],
+        "isProvisional": false,
+        "hasClosures": false,
+        "roadDisruptionLines": [],
+        "roadDisruptionImpactAreas": [],
+        "recurringSchedules": []
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_92fdd2cc9a",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.745811+00:00",
+    "location": "Liverpool Street",
+    "coordinates": {
+      "lat": 51.5178,
+      "lon": -0.0823
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "District disruption may affect Liverpool Street: Part Closure. DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+    "data": {
+      "line": "District",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "district",
+        "statusSeverity": 5,
+        "statusSeverityDescription": "Part Closure",
+        "reason": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T03:30:00Z",
+            "toDate": "2026-06-08T00:29:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "PlannedWork",
+          "categoryDescription": "PlannedWork",
+          "description": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+          "additionalInfo": "Replacement buses operate:Service PL1: Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park - Gunnersbury - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL4: Gunnersbury - Chiswick Park - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;\u00a0",
+          "created": "2026-05-20T18:04:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "partClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_5b84706333",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.745858+00:00",
+    "location": "Farringdon",
+    "coordinates": {
+      "lat": 51.5203,
+      "lon": -0.1053
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "District disruption may affect Farringdon: Part Closure. DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+    "data": {
+      "line": "District",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "district",
+        "statusSeverity": 5,
+        "statusSeverityDescription": "Part Closure",
+        "reason": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T03:30:00Z",
+            "toDate": "2026-06-08T00:29:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "PlannedWork",
+          "categoryDescription": "PlannedWork",
+          "description": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+          "additionalInfo": "Replacement buses operate:Service PL1: Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park - Gunnersbury - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL4: Gunnersbury - Chiswick Park - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;\u00a0",
+          "created": "2026-05-20T18:04:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "partClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_3d8263512b",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.745877+00:00",
+    "location": "Bank",
+    "coordinates": {
+      "lat": 51.5133,
+      "lon": -0.089
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "District disruption may affect Bank: Part Closure. DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+    "data": {
+      "line": "District",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "district",
+        "statusSeverity": 5,
+        "statusSeverityDescription": "Part Closure",
+        "reason": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T03:30:00Z",
+            "toDate": "2026-06-08T00:29:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "PlannedWork",
+          "categoryDescription": "PlannedWork",
+          "description": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+          "additionalInfo": "Replacement buses operate:Service PL1: Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park - Gunnersbury - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL4: Gunnersbury - Chiswick Park - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;\u00a0",
+          "created": "2026-05-20T18:04:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "partClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_0945bcab0a",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.745889+00:00",
+    "location": "Moorgate",
+    "coordinates": {
+      "lat": 51.5186,
+      "lon": -0.0886
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "District disruption may affect Moorgate: Part Closure. DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+    "data": {
+      "line": "District",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "district",
+        "statusSeverity": 5,
+        "statusSeverityDescription": "Part Closure",
+        "reason": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T03:30:00Z",
+            "toDate": "2026-06-08T00:29:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "PlannedWork",
+          "categoryDescription": "PlannedWork",
+          "description": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+          "additionalInfo": "Replacement buses operate:Service PL1: Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park - Gunnersbury - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL4: Gunnersbury - Chiswick Park - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;\u00a0",
+          "created": "2026-05-20T18:04:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "partClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_38bdc60db1",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.745910+00:00",
+    "location": "Tower Hill",
+    "coordinates": {
+      "lat": 51.5098,
+      "lon": -0.0766
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "District disruption may affect Tower Hill: Part Closure. DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+    "data": {
+      "line": "District",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "district",
+        "statusSeverity": 5,
+        "statusSeverityDescription": "Part Closure",
+        "reason": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T03:30:00Z",
+            "toDate": "2026-06-08T00:29:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "PlannedWork",
+          "categoryDescription": "PlannedWork",
+          "description": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+          "additionalInfo": "Replacement buses operate:Service PL1: Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park - Gunnersbury - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL4: Gunnersbury - Chiswick Park - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;\u00a0",
+          "created": "2026-05-20T18:04:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "partClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_ab9c2f976d",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.745924+00:00",
+    "location": "Liverpool Street",
+    "coordinates": {
+      "lat": 51.5178,
+      "lon": -0.0823
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "District disruption may affect Liverpool Street: Minor Delays. District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+    "data": {
+      "line": "District",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "district",
+        "statusSeverity": 9,
+        "statusSeverityDescription": "Minor Delays",
+        "reason": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T11:17:23Z",
+            "toDate": "2026-06-07T00:29:00Z",
+            "isNow": true
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "RealTime",
+          "categoryDescription": "RealTime",
+          "description": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "minorDelays"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_f3d64a1620",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.745934+00:00",
+    "location": "Farringdon",
+    "coordinates": {
+      "lat": 51.5203,
+      "lon": -0.1053
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "District disruption may affect Farringdon: Minor Delays. District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+    "data": {
+      "line": "District",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "district",
+        "statusSeverity": 9,
+        "statusSeverityDescription": "Minor Delays",
+        "reason": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T11:17:23Z",
+            "toDate": "2026-06-07T00:29:00Z",
+            "isNow": true
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "RealTime",
+          "categoryDescription": "RealTime",
+          "description": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "minorDelays"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_7c1a65f0fd",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.745946+00:00",
+    "location": "Bank",
+    "coordinates": {
+      "lat": 51.5133,
+      "lon": -0.089
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "District disruption may affect Bank: Minor Delays. District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+    "data": {
+      "line": "District",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "district",
+        "statusSeverity": 9,
+        "statusSeverityDescription": "Minor Delays",
+        "reason": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T11:17:23Z",
+            "toDate": "2026-06-07T00:29:00Z",
+            "isNow": true
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "RealTime",
+          "categoryDescription": "RealTime",
+          "description": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "minorDelays"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_45ba8f44e4",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.745958+00:00",
+    "location": "Moorgate",
+    "coordinates": {
+      "lat": 51.5186,
+      "lon": -0.0886
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "District disruption may affect Moorgate: Minor Delays. District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+    "data": {
+      "line": "District",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "district",
+        "statusSeverity": 9,
+        "statusSeverityDescription": "Minor Delays",
+        "reason": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T11:17:23Z",
+            "toDate": "2026-06-07T00:29:00Z",
+            "isNow": true
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "RealTime",
+          "categoryDescription": "RealTime",
+          "description": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "minorDelays"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_14a5d6d011",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.745967+00:00",
+    "location": "Tower Hill",
+    "coordinates": {
+      "lat": 51.5098,
+      "lon": -0.0766
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "District disruption may affect Tower Hill: Minor Delays. District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+    "data": {
+      "line": "District",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "district",
+        "statusSeverity": 9,
+        "statusSeverityDescription": "Minor Delays",
+        "reason": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T11:17:23Z",
+            "toDate": "2026-06-07T00:29:00Z",
+            "isNow": true
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "RealTime",
+          "categoryDescription": "RealTime",
+          "description": "District Line: No service between Turnham Green and Ealing Broadway due to planned engineering work and MINOR DELAYS between Wimbledon and Parsons Green eastbound only due to an earlier obstruction on the track. GOOD SERVICE on the rest of the line. ",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "minorDelays"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_e66040cc33",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.745992+00:00",
+    "location": "Liverpool Street",
+    "coordinates": {
+      "lat": 51.5178,
+      "lon": -0.0823
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "Piccadilly disruption may affect Liverpool Street: Part Closure. PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+    "data": {
+      "line": "Piccadilly",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "piccadilly",
+        "statusSeverity": 5,
+        "statusSeverityDescription": "Part Closure",
+        "reason": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-05T23:45:00Z",
+            "toDate": "2026-06-08T00:29:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "PlannedWork",
+          "categoryDescription": "PlannedWork",
+          "description": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+          "additionalInfo": "Replacement buses operateService PL1: (Day and Night Service): Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park (not night journeys) - Gunnersbury (not night journeys) - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL3: (Day Service): Hammersmith - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3, and rail connections to Heathrow Terminals 4 and 5);Service PL4: (Day Service): Gunnersbury - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;Service PL7: (Day and Night Service): Hammersmith - Osterley - Hounslow East - Hounslow Central (Bell Corner) - Hounslow West - Hatton Cross - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3) - Heathrow Terminal 5;",
+          "created": "2026-05-20T18:13:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "partClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_97b0a4bae3",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.746001+00:00",
+    "location": "Farringdon",
+    "coordinates": {
+      "lat": 51.5203,
+      "lon": -0.1053
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "Piccadilly disruption may affect Farringdon: Part Closure. PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+    "data": {
+      "line": "Piccadilly",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "piccadilly",
+        "statusSeverity": 5,
+        "statusSeverityDescription": "Part Closure",
+        "reason": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-05T23:45:00Z",
+            "toDate": "2026-06-08T00:29:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "PlannedWork",
+          "categoryDescription": "PlannedWork",
+          "description": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+          "additionalInfo": "Replacement buses operateService PL1: (Day and Night Service): Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park (not night journeys) - Gunnersbury (not night journeys) - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL3: (Day Service): Hammersmith - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3, and rail connections to Heathrow Terminals 4 and 5);Service PL4: (Day Service): Gunnersbury - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;Service PL7: (Day and Night Service): Hammersmith - Osterley - Hounslow East - Hounslow Central (Bell Corner) - Hounslow West - Hatton Cross - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3) - Heathrow Terminal 5;",
+          "created": "2026-05-20T18:13:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "partClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_4ceaa55cb3",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.746010+00:00",
+    "location": "Bank",
+    "coordinates": {
+      "lat": 51.5133,
+      "lon": -0.089
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "Piccadilly disruption may affect Bank: Part Closure. PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+    "data": {
+      "line": "Piccadilly",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "piccadilly",
+        "statusSeverity": 5,
+        "statusSeverityDescription": "Part Closure",
+        "reason": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-05T23:45:00Z",
+            "toDate": "2026-06-08T00:29:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "PlannedWork",
+          "categoryDescription": "PlannedWork",
+          "description": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+          "additionalInfo": "Replacement buses operateService PL1: (Day and Night Service): Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park (not night journeys) - Gunnersbury (not night journeys) - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL3: (Day Service): Hammersmith - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3, and rail connections to Heathrow Terminals 4 and 5);Service PL4: (Day Service): Gunnersbury - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;Service PL7: (Day and Night Service): Hammersmith - Osterley - Hounslow East - Hounslow Central (Bell Corner) - Hounslow West - Hatton Cross - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3) - Heathrow Terminal 5;",
+          "created": "2026-05-20T18:13:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "partClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_073271f581",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.746019+00:00",
+    "location": "Moorgate",
+    "coordinates": {
+      "lat": 51.5186,
+      "lon": -0.0886
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "Piccadilly disruption may affect Moorgate: Part Closure. PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+    "data": {
+      "line": "Piccadilly",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "piccadilly",
+        "statusSeverity": 5,
+        "statusSeverityDescription": "Part Closure",
+        "reason": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-05T23:45:00Z",
+            "toDate": "2026-06-08T00:29:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "PlannedWork",
+          "categoryDescription": "PlannedWork",
+          "description": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+          "additionalInfo": "Replacement buses operateService PL1: (Day and Night Service): Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park (not night journeys) - Gunnersbury (not night journeys) - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL3: (Day Service): Hammersmith - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3, and rail connections to Heathrow Terminals 4 and 5);Service PL4: (Day Service): Gunnersbury - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;Service PL7: (Day and Night Service): Hammersmith - Osterley - Hounslow East - Hounslow Central (Bell Corner) - Hounslow West - Hatton Cross - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3) - Heathrow Terminal 5;",
+          "created": "2026-05-20T18:13:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "partClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_acc7e2de3a",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.746037+00:00",
+    "location": "Tower Hill",
+    "coordinates": {
+      "lat": 51.5098,
+      "lon": -0.0766
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "Piccadilly disruption may affect Tower Hill: Part Closure. PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+    "data": {
+      "line": "Piccadilly",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "piccadilly",
+        "statusSeverity": 5,
+        "statusSeverityDescription": "Part Closure",
+        "reason": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-05T23:45:00Z",
+            "toDate": "2026-06-08T00:29:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "PlannedWork",
+          "categoryDescription": "PlannedWork",
+          "description": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+          "additionalInfo": "Replacement buses operateService PL1: (Day and Night Service): Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park (not night journeys) - Gunnersbury (not night journeys) - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL3: (Day Service): Hammersmith - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3, and rail connections to Heathrow Terminals 4 and 5);Service PL4: (Day Service): Gunnersbury - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;Service PL7: (Day and Night Service): Hammersmith - Osterley - Hounslow East - Hounslow Central (Bell Corner) - Hounslow West - Hatton Cross - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3) - Heathrow Terminal 5;",
+          "created": "2026-05-20T18:13:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "partClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_bac771172a",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.746054+00:00",
+    "location": "Liverpool Street",
+    "coordinates": {
+      "lat": 51.5178,
+      "lon": -0.0823
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "Waterloo & City disruption may affect Liverpool Street: Planned Closure. Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+    "data": {
+      "line": "Waterloo & City",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "waterloo-city",
+        "statusSeverity": 4,
+        "statusSeverityDescription": "Planned Closure",
+        "reason": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T03:15:00Z",
+            "toDate": "2026-06-06T22:59:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "Information",
+          "categoryDescription": "Information",
+          "description": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+          "created": "2026-01-04T01:21:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "plannedClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_202279515c",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.746063+00:00",
+    "location": "Farringdon",
+    "coordinates": {
+      "lat": 51.5203,
+      "lon": -0.1053
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "Waterloo & City disruption may affect Farringdon: Planned Closure. Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+    "data": {
+      "line": "Waterloo & City",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "waterloo-city",
+        "statusSeverity": 4,
+        "statusSeverityDescription": "Planned Closure",
+        "reason": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T03:15:00Z",
+            "toDate": "2026-06-06T22:59:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "Information",
+          "categoryDescription": "Information",
+          "description": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+          "created": "2026-01-04T01:21:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "plannedClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_98ea7761e7",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.746072+00:00",
+    "location": "Bank",
+    "coordinates": {
+      "lat": 51.5133,
+      "lon": -0.089
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "Waterloo & City disruption may affect Bank: Planned Closure. Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+    "data": {
+      "line": "Waterloo & City",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "waterloo-city",
+        "statusSeverity": 4,
+        "statusSeverityDescription": "Planned Closure",
+        "reason": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T03:15:00Z",
+            "toDate": "2026-06-06T22:59:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "Information",
+          "categoryDescription": "Information",
+          "description": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+          "created": "2026-01-04T01:21:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "plannedClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_420dd7c4d8",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.746082+00:00",
+    "location": "Moorgate",
+    "coordinates": {
+      "lat": 51.5186,
+      "lon": -0.0886
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "Waterloo & City disruption may affect Moorgate: Planned Closure. Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+    "data": {
+      "line": "Waterloo & City",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "waterloo-city",
+        "statusSeverity": 4,
+        "statusSeverityDescription": "Planned Closure",
+        "reason": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T03:15:00Z",
+            "toDate": "2026-06-06T22:59:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "Information",
+          "categoryDescription": "Information",
+          "description": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+          "created": "2026-01-04T01:21:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "plannedClosure"
+        }
+      }
+    },
+    "processed_by": []
+  },
+  {
+    "id": "evt_74ec77a094",
+    "source_agent": "agent_1_data_intelligence",
+    "event_type": "transport_disruption_risk",
+    "timestamp": "2026-06-06T11:22:04.746090+00:00",
+    "location": "Tower Hill",
+    "coordinates": {
+      "lat": 51.5098,
+      "lon": -0.0766
+    },
+    "severity": "medium",
+    "confidence": 0.72,
+    "summary": "Waterloo & City disruption may affect Tower Hill: Planned Closure. Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+    "data": {
+      "line": "Waterloo & City",
+      "status": {
+        "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+        "id": 0,
+        "lineId": "waterloo-city",
+        "statusSeverity": 4,
+        "statusSeverityDescription": "Planned Closure",
+        "reason": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+        "created": "0001-01-01T00:00:00",
+        "validityPeriods": [
+          {
+            "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+            "fromDate": "2026-06-06T03:15:00Z",
+            "toDate": "2026-06-06T22:59:00Z",
+            "isNow": false
+          }
+        ],
+        "disruption": {
+          "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+          "category": "Information",
+          "categoryDescription": "Information",
+          "description": "Waterloo & City line: service operates 06:00 until 00:30, Monday to Friday only. There is no service on Saturdays, Sundays and on bank/public holidays.",
+          "created": "2026-01-04T01:21:00Z",
+          "affectedRoutes": [],
+          "affectedStops": [],
+          "closureText": "plannedClosure"
+        }
+      }
+    },
+    "processed_by": []
+  }
+]
