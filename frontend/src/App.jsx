@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import "./style.css";
 
-const API = "http://localhost:8000";
+const API = import.meta.env.VITE_API_URL || "";
 
 function normalizeText(value) {
   return String(value || "").toLowerCase();
@@ -113,7 +113,12 @@ export default function App() {
   const [matchedEvents, setMatchedEvents] = useState([]);
   const [simulation, setSimulation] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [voiceLoading, setVoiceLoading] = useState(false);
+  const [recording, setRecording] = useState(false);
   const [searchMessage, setSearchMessage] = useState("");
+  const mediaRecorderRef = useRef(null);
+  const mediaStreamRef = useRef(null);
+  const audioChunksRef = useRef([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -225,11 +230,120 @@ export default function App() {
     }
   }
 
+  async function submitVoiceAudio(audioBlob) {
+    const form = new FormData();
+    form.append("audio", audioBlob, "citisim-voice.webm");
+    form.append("matched_events", JSON.stringify(matchedEvents));
+    form.append("fallback_prompt", prompt);
+
+    setVoiceLoading(true);
+    setLoading(true);
+    setSearchMessage("Agent 5 is transcribing your voice and sending it through the simulation agents.");
+
+    try {
+      const res = await fetch(`${API}/voice/simulate`, {
+        method: "POST",
+        body: form,
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(errorText || "Voice simulation failed.");
+      }
+
+      const data = await res.json();
+      setPrompt(data.transcript || prompt);
+      setSimulation(data.simulation);
+
+      if (Array.isArray(data.simulation?.agent_outputs)) {
+        setAgents(data.simulation.agent_outputs);
+      }
+
+      if (data.audio_base64) {
+        const audio = new Audio(`data:${data.content_type || "audio/mpeg"};base64,${data.audio_base64}`);
+        audio.play().catch((error) => {
+          console.error("Voice playback failed:", error);
+          setSearchMessage("Simulation finished, but the browser blocked audio playback.");
+        });
+      }
+
+      setSearchMessage(
+        data.warning ||
+          "Simulation finished. Agent 5 read the recommendation response aloud."
+      );
+    } catch (error) {
+      console.error("Voice simulation failed:", error);
+      setSearchMessage(
+        "Voice simulation failed. Check the FastAPI backend and ElevenLabs API key, or type the prompt and press Simulate."
+      );
+    } finally {
+      setVoiceLoading(false);
+      setLoading(false);
+    }
+  }
+
+  async function startVoiceCapture() {
+    if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
+      setSearchMessage("Voice recording is not available in this browser.");
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream);
+
+      audioChunksRef.current = [];
+      mediaStreamRef.current = stream;
+      mediaRecorderRef.current = recorder;
+
+      recorder.ondataavailable = (event) => {
+        if (event.data?.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
+
+      recorder.onstop = () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: "audio/webm" });
+        mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
+        mediaStreamRef.current = null;
+        mediaRecorderRef.current = null;
+
+        if (audioBlob.size > 0) {
+          submitVoiceAudio(audioBlob);
+        } else {
+          setSearchMessage("No voice audio was captured.");
+        }
+      };
+
+      recorder.start();
+      setRecording(true);
+      setSearchMessage("Listening. Press Stop when you are finished speaking.");
+    } catch (error) {
+      console.error("Could not start microphone:", error);
+      setSearchMessage("Could not access your microphone. Allow microphone permissions and try again.");
+    }
+  }
+
+  function stopVoiceCapture() {
+    if (mediaRecorderRef.current?.state === "recording") {
+      mediaRecorderRef.current.stop();
+    }
+    setRecording(false);
+  }
+
+  function toggleVoiceCapture() {
+    if (recording) {
+      stopVoiceCapture();
+    } else {
+      startVoiceCapture();
+    }
+  }
+
   return (
     <main>
       <header>
         <p className="eyebrow">Urban Operations Track</p>
-        <h1>Urban Pulse</h1>
+        <h1>CitiSim</h1>
         <p>Search agent data, run what-if simulations, and preview operational impacts.</p>
         {dataSource && (
           <span className={`source-badge source-${dataSource.type}`}>
@@ -253,14 +367,14 @@ export default function App() {
         </div>
         <div className="stat-card">
           <span>Active Agents</span>
-          <strong>{activeAgentCount}/4</strong>
+          <strong>{activeAgentCount}/5</strong>
         </div>
       </section>
 
       <section className="agent-overview">
         <div className="panel-header">
           <h2>Agent Outputs</h2>
-          <span>Agents 1-4 active, Agent 5 excluded</span>
+          <span>Agents 1-5 active</span>
         </div>
 
         <div className="agent-grid">
@@ -295,6 +409,15 @@ export default function App() {
 
           <button type="button" onClick={runSimulation} disabled={loading}>
             {loading ? "Simulating..." : "Simulate"}
+          </button>
+
+          <button
+            type="button"
+            className={`voice-button ${recording ? "recording" : ""}`}
+            onClick={toggleVoiceCapture}
+            disabled={voiceLoading}
+          >
+            {recording ? "Stop" : voiceLoading ? "Voice..." : "Speak"}
           </button>
         </div>
 

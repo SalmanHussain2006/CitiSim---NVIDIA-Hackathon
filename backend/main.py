@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import json
@@ -8,8 +8,14 @@ from agents.agent2_relationship_discovery.agent2 import run_agent2
 from agents.agent3_forecast_simulation.agent3 import run_agent3
 from agents.agent3_forecast_simulation.congestion_forecaster import adapt_agent_events
 from agents.agent4_recommendation.agent4 import generate_forecast_recommendations, generate_recommendations
+from agents.agent5_voice_operations.agent5 import (
+    VoiceAgentError,
+    recommendation_script,
+    synthesize_speech,
+    transcribe_audio,
+)
 
-app = FastAPI(title="Urban Pulse API")
+app = FastAPI(title="CitiSim API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,6 +32,10 @@ EVENT_SOURCE = {"type": "unknown", "detail": "No event source loaded."}
 class SimulationRequest(BaseModel):
     prompt: str
     matched_events: list = Field(default_factory=list)
+
+
+class SpeechRequest(BaseModel):
+    text: str
 
 
 def latest_json(folder, prefix=None):
@@ -159,11 +169,171 @@ def infer_scenario(prompt):
         return "station_disruption"
     if any(term in text for term in ["rain", "weather", "wind", "storm"]):
         return "heavy_rain"
-    if any(term in text for term in ["planning", "development", "construction"]):
+    if any(term in text for term in ["planning", "development", "construction", "pedestrianised", "pedestrianized", "pedestrian"]):
         return "office_development"
     if any(term in text for term in ["road", "close", "closure", "roadworks", "traffic"]):
         return "roadworks"
     return "baseline"
+
+
+def event_matches_prompt(event, prompt, location, scenario):
+    text = " ".join(
+        str(event.get(key, ""))
+        for key in [
+            "source_agent",
+            "location",
+            "location_id",
+            "event_type",
+            "severity",
+            "summary",
+            "title",
+            "action",
+        ]
+    ).lower()
+    terms = [term for term in prompt.lower().split() if len(term) > 2]
+    scenario_terms = {
+        "station_disruption": ["transport", "tube", "train", "station", "line"],
+        "heavy_rain": ["weather", "rain", "storm", "flood", "wind"],
+        "office_development": ["planning", "development", "construction", "footfall", "pedestrian"],
+        "roadworks": ["road", "traffic", "roadworks", "closure", "disruption"],
+        "baseline": [],
+    }
+
+    location_match = slug(location) in slug(event.get("location") or event.get("location_id"))
+    term_match = any(term in text for term in terms)
+    scenario_match = any(term in text for term in scenario_terms.get(scenario, []))
+
+    return location_match or term_match or scenario_match
+
+
+def select_context_events(prompt, all_events, location, scenario, limit=80):
+    matches = [
+        event
+        for event in all_events
+        if event_matches_prompt(event, prompt, location, scenario)
+    ]
+
+    return matches[:limit]
+
+
+def scenario_recommendations(prompt, scenario, location, chart, timeline):
+    top_factor = max(chart, key=lambda item: item["impact"]) if chart else {"factor": "city operations", "impact": 0}
+    peak = max(timeline, key=lambda item: item.get("congestion", 0)) if timeline else {}
+    peak_time = peak.get("time") or "the next operating window"
+
+    templates = {
+        "office_development": [
+            (
+                "pedestrian_flow",
+                "high",
+                f"Create a pedestrian-first operating plan for {location}",
+                "Model temporary crossings, bus stop changes, delivery windows, and stewarding before approving the scheme.",
+            ),
+            (
+                "business_access",
+                "medium",
+                f"Protect business access around {location}",
+                "Publish loading bay alternatives and access windows for nearby shops, offices, and venues.",
+            ),
+        ],
+        "station_disruption": [
+            (
+                "transport_resilience",
+                "high",
+                f"Prepare station diversion routes near {location}",
+                "Coordinate TfL messaging, bus bridging, taxi ranks, and crowd control around exits before peak demand.",
+            ),
+            (
+                "crowd_management",
+                "medium",
+                f"Reduce platform-to-street crowding near {location}",
+                "Use live signage and staff deployment to split flows across nearby stations and quieter streets.",
+            ),
+        ],
+        "heavy_rain": [
+            (
+                "weather_response",
+                "high",
+                f"Prepare wet-weather controls for {location}",
+                "Prioritise drainage checks, sheltered queue plans, slower signal timings, and road incident monitoring.",
+            ),
+            (
+                "public_messaging",
+                "medium",
+                f"Warn travellers about weather impact near {location}",
+                "Push guidance for extra journey time, safer walking routes, and alternative cycle options.",
+            ),
+        ],
+        "roadworks": [
+            (
+                "traffic_management",
+                "high",
+                f"Stage road closures around {location}",
+                "Use phased lane restrictions, signed diversion routes, and bus-priority measures during the peak risk period.",
+            ),
+            (
+                "network_coordination",
+                "medium",
+                f"Coordinate nearby works before traffic builds at {location}",
+                "Pause non-critical permits nearby and monitor junction queues in real time.",
+            ),
+        ],
+        "baseline": [
+            (
+                "operations_monitoring",
+                "medium",
+                f"Monitor the simulated pressure around {location}",
+                "Keep live event, footfall, transport, and air-quality feeds under review while the scenario develops.",
+            ),
+        ],
+    }
+
+    recommendations = []
+    for rec_type, priority, title, action in templates.get(scenario, templates["baseline"]):
+        recommendations.append(
+            {
+                "id": f"rec_prompt_{slug(location)}_{scenario}_{rec_type}",
+                "source_agent": "agent_4_recommendation",
+                "location": location,
+                "priority": priority,
+                "recommendation_type": rec_type,
+                "title": title,
+                "action": action,
+                "reasoning": [
+                    f"The prompt was interpreted as {scenario.replace('_', ' ')}.",
+                    f"The strongest simulated factor is {top_factor['factor']} at {top_factor['impact']}%.",
+                    f"Peak congestion pressure is expected around {peak_time}.",
+                    f"Original prompt: {prompt}",
+                ],
+                "predicted_outcome": {
+                    "top_factor": top_factor["factor"],
+                    "top_factor_impact": top_factor["impact"],
+                    "peak_time": peak_time,
+                },
+                "source_event_ids": [],
+            }
+        )
+
+    return recommendations
+
+
+def dedupe_recommendations(recommendations):
+    deduped = []
+    seen = set()
+
+    for recommendation in recommendations:
+        if isinstance(recommendation, str):
+            key = recommendation
+        else:
+            key = recommendation.get("id") or recommendation.get("title") or recommendation.get("action")
+
+        if key in seen:
+            continue
+
+        seen.add(key)
+        deduped.append(recommendation)
+
+    return deduped
 
 
 def impact_chart_from_forecast(forecast, location_id=None):
@@ -277,12 +447,25 @@ def agent_payload(events_data=None, relationship_graph=None, forecast_payload=No
             "metric_label": "actions",
             "items": recommendations_payload.get("recommendations", [])[:6],
         },
+        {
+            "id": "agent_5",
+            "name": "Agent 5",
+            "title": "Voice Operations",
+            "status": "active",
+            "summary": "Listens to operators, sends transcripts into simulation, and speaks recommendations.",
+            "metric": 2,
+            "metric_label": "voice modes",
+            "items": [
+                "Speech-to-text input through ElevenLabs.",
+                "Text-to-speech recommendation playback after simulation.",
+            ],
+        },
     ]
 
 
 @app.get("/")
 def root():
-    return {"status": "Urban Pulse backend running"}
+    return {"status": "CitiSim backend running"}
 
 
 @app.get("/events")
@@ -322,10 +505,10 @@ def simulate(req: SimulationRequest):
     prompt = req.prompt.lower()
     matched_events = req.matched_events or []
     all_events = load_current_events()
-    context_events = matched_events or all_events
     location = infer_location(prompt, matched_events)
     location_id = slug(location)
     scenario = infer_scenario(prompt)
+    context_events = matched_events or select_context_events(prompt, all_events, location, scenario) or all_events
 
     relationship_graph = run_agent2(agent2_records(context_events), min_active_buckets=1)
     forecast_payload = run_agent3(
@@ -340,8 +523,9 @@ def simulate(req: SimulationRequest):
     timeline = timeline_from_forecast(forecast_payload.get("forecast", []), location_id)
     top = max(chart, key=lambda x: x["impact"])
 
-    recommendation_list = (
-        generate_recommendations(context_events)
+    recommendation_list = dedupe_recommendations(
+        scenario_recommendations(req.prompt, scenario, location, chart, timeline)
+        + generate_recommendations(context_events)
         + generate_forecast_recommendations(forecast_payload)
     )
     if not recommendation_list:
@@ -382,4 +566,76 @@ def simulate(req: SimulationRequest):
             recommendations_payload={"recommendations": recommendation_list},
         ),
         "recommendations": recommendation_list[:8],
+    }
+
+
+@app.post("/voice/transcribe")
+async def voice_transcribe(audio: UploadFile = File(...)):
+    audio_bytes = await audio.read()
+    transcript = transcribe_audio(
+        audio_bytes,
+        filename=audio.filename or "voice.webm",
+        content_type=audio.content_type or "audio/webm",
+    )
+    return {"transcript": transcript}
+
+
+@app.post("/voice/speak")
+def voice_speak(req: SpeechRequest):
+    speech = synthesize_speech(req.text)
+    return {
+        "text": speech.text,
+        "audio_base64": speech.audio_base64,
+        "content_type": speech.content_type,
+        "warning": speech.warning,
+    }
+
+
+@app.post("/voice/simulate")
+async def voice_simulate(
+    audio: UploadFile = File(...),
+    matched_events: str = Form("[]"),
+    fallback_prompt: str = Form(""),
+):
+    warning = ""
+    audio_bytes = await audio.read()
+
+    try:
+        transcript = transcribe_audio(
+            audio_bytes,
+            filename=audio.filename or "voice.webm",
+            content_type=audio.content_type or "audio/webm",
+        )
+    except VoiceAgentError as error:
+        if not fallback_prompt.strip():
+            raise
+        transcript = fallback_prompt.strip()
+        warning = f"Voice transcription unavailable; used typed prompt instead. {error}"
+
+    try:
+        matched = json.loads(matched_events)
+        if not isinstance(matched, list):
+            matched = []
+    except json.JSONDecodeError:
+        matched = []
+
+    simulation = simulate(SimulationRequest(prompt=transcript, matched_events=matched))
+    spoken_text = recommendation_script(simulation)
+
+    try:
+        speech = synthesize_speech(spoken_text)
+        audio_base64 = speech.audio_base64
+        content_type = speech.content_type
+    except VoiceAgentError as error:
+        audio_base64 = ""
+        content_type = "audio/mpeg"
+        warning = " ".join([warning, f"Voice response unavailable. {error}"]).strip()
+
+    return {
+        "transcript": transcript,
+        "simulation": simulation,
+        "spoken_text": spoken_text,
+        "audio_base64": audio_base64,
+        "content_type": content_type,
+        "warning": warning,
     }

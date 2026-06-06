@@ -302,7 +302,7 @@ header p {
 
 .prompt-row {
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) 112px 128px;
+  grid-template-columns: minmax(260px, 1fr) 112px 128px 112px;
   gap: 10px;
   margin-top: 22px;
   align-items: stretch;
@@ -361,6 +361,21 @@ button:disabled {
 
 .prompt-row button:first-of-type:hover {
   background: var(--accent-soft);
+}
+
+.voice-button {
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.voice-button:hover {
+  border-color: #0b6745;
+  background: #0b6745;
+}
+
+.voice-button.recording {
+  border-color: var(--red);
+  background: var(--red);
 }
 
 .helper-text {
