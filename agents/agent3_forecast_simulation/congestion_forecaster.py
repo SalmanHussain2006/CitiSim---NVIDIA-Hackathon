@@ -73,6 +73,12 @@ def _impact_from_severity(value) -> float:
     return SEVERITY_IMPACT.get(str(value).strip().lower(), 0.5)
 
 
+def _forecast_time_from_data(value):
+    if isinstance(value, dict) and value.get("forecast_time"):
+        return value["forecast_time"]
+    return None
+
+
 def adapt_agent_events(records: Iterable[Mapping] | pd.DataFrame) -> pd.DataFrame:
     """Convert Agent 1 or Agent 2 event shapes into Agent 3's forecast schema."""
 
@@ -89,6 +95,9 @@ def adapt_agent_events(records: Iterable[Mapping] | pd.DataFrame) -> pd.DataFram
         frame["location_id"] = locations.map(_slug)
     if "start_time" not in frame.columns:
         frame["start_time"] = frame.get("timestamp", pd.Timestamp.utcnow().isoformat())
+    if "data" in frame.columns:
+        forecast_times = frame["data"].map(_forecast_time_from_data)
+        frame.loc[forecast_times.notna(), "start_time"] = forecast_times[forecast_times.notna()]
     if "impact_score" not in frame.columns:
         severities = frame["severity"] if "severity" in frame.columns else pd.Series(["medium"] * len(frame))
         frame["impact_score"] = severities.map(_impact_from_severity)
@@ -121,13 +130,8 @@ def _relationship_lookup(relationship_graph: Mapping | None) -> dict[str, list[d
 
 
 def _future_hours(events: pd.DataFrame, horizon_hours: int) -> list[pd.Timestamp]:
-    base = pd.Timestamp.now(tz="UTC")
-    if not events.empty:
-        latest = events["start_time"].max()
-        if pd.notna(latest):
-            base = max(base, latest)
-    start = base.ceil("h")
-    return [start + timedelta(hours=offset) for offset in range(1, horizon_hours + 1)]
+    start = pd.Timestamp.now(tz="UTC").ceil("h")
+    return [start + timedelta(hours=offset) for offset in range(horizon_hours)]
 
 
 def _time_multiplier(hour: int, outcome: str) -> float:
