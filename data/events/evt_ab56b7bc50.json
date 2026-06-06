@@ -1,0 +1,26 @@
+{
+  "id": "evt_ab56b7bc50",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "location_monitoring_snapshot",
+  "timestamp": "2026-06-06T12:30:07.865363+00:00",
+  "location": "Tower Hill",
+  "coordinates": {
+    "lat": 51.5098,
+    "lon": -0.0766
+  },
+  "severity": "low",
+  "confidence": 1.0,
+  "summary": "Agent 1 is actively monitoring Tower Hill.",
+  "data": {
+    "location_profile": {
+      "lat": 51.5098,
+      "lon": -0.0766,
+      "keywords": [
+        "tower hill",
+        "tower gateway",
+        "tower bridge"
+      ]
+    }
+  },
+  "processed_by": []
+}

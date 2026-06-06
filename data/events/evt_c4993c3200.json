@@ -1,0 +1,21 @@
+{
+  "id": "evt_c4993c3200",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "footfall_signal",
+  "timestamp": "2026-06-06T12:30:13.535876+00:00",
+  "location": "Liverpool Street",
+  "coordinates": {
+    "lat": 51.5178,
+    "lon": -0.0823
+  },
+  "severity": "high",
+  "confidence": 0.8,
+  "summary": "Footfall at Liverpool Street is 1.32x baseline.",
+  "data": {
+    "location": "Liverpool Street",
+    "timestamp": "2026-06-06T12:30:13.534096+00:00",
+    "footfall_count": 18500,
+    "baseline": 14000
+  },
+  "processed_by": []
+}

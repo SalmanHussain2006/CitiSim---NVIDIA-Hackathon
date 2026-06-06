@@ -3,15 +3,14 @@ import time
 from pathlib import Path
 from datetime import datetime, timezone
 
-from connectors.tfl import pull_road_disruptions, pull_line_status
-from connectors.weather import pull_weather
-from connectors.air_quality import pull_air_quality_sites
-from connectors.footfall import pull_footfall
-from connectors.events import pull_city_events
-from connectors.planning import pull_planning_data
-
-from utils.event_schema import create_event
-from utils.location_matcher import (
+from agents.agent1_data_intelligence.connectors.tfl import pull_road_disruptions, pull_line_status
+from agents.agent1_data_intelligence.connectors.weather import pull_weather
+from agents.agent1_data_intelligence.connectors.air_quality import pull_air_quality_sites
+from agents.agent1_data_intelligence.connectors.footfall import pull_footfall
+from agents.agent1_data_intelligence.connectors.events import pull_city_events
+from agents.agent1_data_intelligence.connectors.planning import pull_planning_data
+from agents.agent1_data_intelligence.utils.event_schema import create_event
+from agents.agent1_data_intelligence.utils.location_matcher import (
     MONITORED_LOCATIONS,
     match_location,
     get_location_coordinates,

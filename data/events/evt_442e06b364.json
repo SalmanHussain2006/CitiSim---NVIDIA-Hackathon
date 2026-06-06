@@ -1,0 +1,22 @@
+{
+  "id": "evt_442e06b364",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "city_event_pressure",
+  "timestamp": "2026-06-06T12:30:13.536996+00:00",
+  "location": "Liverpool Street",
+  "coordinates": {
+    "lat": 51.5178,
+    "lon": -0.0823
+  },
+  "severity": "medium",
+  "confidence": 0.78,
+  "summary": "Station Area Crowd Pressure may increase movement pressure around Liverpool Street.",
+  "data": {
+    "name": "Station Area Crowd Pressure",
+    "location": "Liverpool Street",
+    "timestamp": "2026-06-06T12:30:13.535876+00:00",
+    "expected_attendance": 5000,
+    "category": "transport_related"
+  },
+  "processed_by": []
+}

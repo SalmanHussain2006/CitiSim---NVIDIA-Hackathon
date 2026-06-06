@@ -1,0 +1,45 @@
+{
+  "id": "evt_9ea1f1f5ea",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "transport_disruption_risk",
+  "timestamp": "2026-06-06T12:30:08.588149+00:00",
+  "location": "Liverpool Street",
+  "coordinates": {
+    "lat": 51.5178,
+    "lon": -0.0823
+  },
+  "severity": "high",
+  "confidence": 0.72,
+  "summary": "Windrush disruption may affect Liverpool Street: Severe Delays. Windrush Line: Severe delays between New Cross Gate and West Croydon while we fix a points failure at Norwood Junction. GOOD SERVICE on the rest of the line. Tickets are being accepted on London Underground.  ",
+  "data": {
+    "line": "Windrush",
+    "status": {
+      "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+      "id": 0,
+      "lineId": "windrush",
+      "statusSeverity": 6,
+      "statusSeverityDescription": "Severe Delays",
+      "reason": "Windrush Line: Severe delays between New Cross Gate and West Croydon while we fix a points failure at Norwood Junction. GOOD SERVICE on the rest of the line. Tickets are being accepted on London Underground.  ",
+      "created": "0001-01-01T00:00:00",
+      "validityPeriods": [
+        {
+          "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+          "fromDate": "2026-06-06T12:15:13Z",
+          "toDate": "2026-06-07T00:29:00Z",
+          "isNow": true
+        }
+      ],
+      "disruption": {
+        "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+        "category": "RealTime",
+        "categoryDescription": "RealTime",
+        "description": "Windrush Line: Severe delays between New Cross Gate and West Croydon while we fix a points failure at Norwood Junction. GOOD SERVICE on the rest of the line. Tickets are being accepted on London Underground.  ",
+        "affectedRoutes": [],
+        "affectedStops": [],
+        "closureText": "severeDelays"
+      }
+    },
+    "note": "Line-level TfL disruption applied to monitored hubs."
+  },
+  "processed_by": []
+}

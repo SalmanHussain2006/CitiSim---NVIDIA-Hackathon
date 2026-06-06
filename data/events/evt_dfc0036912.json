@@ -1,0 +1,22 @@
+{
+  "id": "evt_dfc0036912",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "planning_infrastructure_signal",
+  "timestamp": "2026-06-06T12:30:13.537987+00:00",
+  "location": "Farringdon",
+  "coordinates": {
+    "lat": 51.5203,
+    "lon": -0.1053
+  },
+  "severity": "medium",
+  "confidence": 0.74,
+  "summary": "public_realm_upgrade near Farringdon: Street environment works may temporarily affect pedestrian routes.",
+  "data": {
+    "location": "Farringdon",
+    "timestamp": "2026-06-06T12:30:13.536996+00:00",
+    "project_type": "public_realm_upgrade",
+    "impact": "medium",
+    "description": "Street environment works may temporarily affect pedestrian routes."
+  },
+  "processed_by": []
+}
