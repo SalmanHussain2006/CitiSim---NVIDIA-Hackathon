@@ -1,20 +1,14 @@
 """
-storage.py - the local store for Urban Pulse (PostgreSQL version).
+storage.py - PostgreSQL event store for CityPulse.
 
-Same idea as before: every adapter produces normalised Event records and writes
-them here; the agents read from here and nowhere else. Now backed by Postgres,
-which matches the project plan and gives us JSONB (queryable raw payloads),
-proper timestamp types, and room to add PostGIS for geo queries later.
+This is the shared event layer between Agent 1 and Agent 2.
 
-Setup (one-off):
-  1. Run a Postgres server. Quickest is Docker:
-       docker run --name urban-pg -e POSTGRES_USER=urban \
-         -e POSTGRES_PASSWORD=urban -e POSTGRES_DB=urban_pulse \
-         -p 5432:5432 -d postgres:16
-  2. pip install "psycopg[binary]"
-  3. (optional) export DATABASE_URL=postgresql://urban:urban@localhost:5432/urban_pulse
+Agent 1/adapters produce normalised Event records.
+Agent 2 reads those same records and builds relationship graphs.
 
-Then prove it works:  python storage.py
+The schema matches Agent 2's expected input:
+event_id, event_type, location_id, start_time, impact_score,
+duration_minutes, confidence.
 """
 
 from __future__ import annotations
@@ -28,6 +22,7 @@ import psycopg
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 
+
 DATABASE_URL = os.environ.get(
     "DATABASE_URL",
     "postgresql://urban:urban@localhost:5432/urban_pulse",
@@ -36,115 +31,235 @@ DATABASE_URL = os.environ.get(
 
 @dataclass
 class Event:
-    """One normalised record. Every adapter produces these, whatever the source."""
-    id: str                                # stable, derived from the source's own id (de-duplication key)
-    source: str                            # e.g. "tfl_line", "tfl_road", "londonair", "weather"
-    category: str                          # e.g. "transport", "roadworks", "incident", "air_quality", "weather"
-    description: str = ""                  # human-readable summary
-    timestamp: Optional[datetime] = None   # when the event applies
+    """
+    One normalised city event.
+
+    This shape is intentionally aligned with Agent 2's relationship graph input.
+    """
+
+    event_id: str
+    event_type: str
+    location_id: str
+    start_time: datetime
+    impact_score: float
+    duration_minutes: int
+    confidence: float
+
+    source: str = "unknown"
+    description: str = ""
     latitude: Optional[float] = None
     longitude: Optional[float] = None
-    location_name: Optional[str] = None    # line, borough, road name...
-    value: Optional[float] = None          # numeric measurement or severity score
-    raw: Any = None                        # the original payload, kept verbatim (stored as JSONB)
+    raw: Any = None
 
 
 def init_db(dsn: str = DATABASE_URL) -> psycopg.Connection:
-    """Connect (and create the table if needed). Returns an open connection."""
+    """
+    Connect to Postgres and create the events table if needed.
+    """
+
     conn = psycopg.connect(dsn, row_factory=dict_row)
+
     conn.execute(
         """
         CREATE TABLE IF NOT EXISTS events (
-            id            TEXT PRIMARY KEY,
-            source        TEXT NOT NULL,
-            category      TEXT NOT NULL,
-            description   TEXT,
-            timestamp     TIMESTAMPTZ,
-            latitude      DOUBLE PRECISION,
-            longitude     DOUBLE PRECISION,
-            location_name TEXT,
-            value         DOUBLE PRECISION,
-            raw_json      JSONB,
-            ingested_at   TIMESTAMPTZ NOT NULL
+            event_id TEXT PRIMARY KEY,
+            event_type TEXT NOT NULL,
+            location_id TEXT NOT NULL,
+            start_time TIMESTAMPTZ NOT NULL,
+            impact_score DOUBLE PRECISION NOT NULL,
+            duration_minutes INTEGER NOT NULL,
+            confidence DOUBLE PRECISION NOT NULL,
+
+            source TEXT NOT NULL DEFAULT 'unknown',
+            description TEXT,
+            latitude DOUBLE PRECISION,
+            longitude DOUBLE PRECISION,
+            raw_json JSONB,
+            ingested_at TIMESTAMPTZ NOT NULL
         )
         """
     )
-    # Helps the agents query "what's recent in this category" quickly.
-    conn.execute("CREATE INDEX IF NOT EXISTS idx_events_cat_time ON events(category, timestamp)")
+
+    conn.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_events_type_time
+        ON events(event_type, start_time)
+        """
+    )
+
+    conn.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_events_location_time
+        ON events(location_id, start_time)
+        """
+    )
+
     conn.commit()
     return conn
 
 
 def upsert_event(conn: psycopg.Connection, event: Event) -> None:
     """
-    Insert a new event, or update it if we've seen its id before.
+    Insert an event, or update it if the same event_id already exists.
 
-    The id is the dedup key: when the scheduler re-fetches the same roadworks
-    every few minutes, the row is refreshed in place instead of duplicated.
+    This prevents duplicates when adapters repeatedly fetch the same incident.
     """
+
     conn.execute(
         """
-        INSERT INTO events (id, source, category, description, timestamp,
-                            latitude, longitude, location_name, value, raw_json, ingested_at)
-        VALUES (%(id)s, %(source)s, %(category)s, %(description)s, %(timestamp)s,
-                %(latitude)s, %(longitude)s, %(location_name)s, %(value)s, %(raw_json)s, %(ingested_at)s)
-        ON CONFLICT (id) DO UPDATE SET
-            description   = EXCLUDED.description,
-            timestamp     = EXCLUDED.timestamp,
-            latitude      = EXCLUDED.latitude,
-            longitude     = EXCLUDED.longitude,
-            location_name = EXCLUDED.location_name,
-            value         = EXCLUDED.value,
-            raw_json      = EXCLUDED.raw_json,
-            ingested_at   = EXCLUDED.ingested_at
+        INSERT INTO events (
+            event_id,
+            event_type,
+            location_id,
+            start_time,
+            impact_score,
+            duration_minutes,
+            confidence,
+            source,
+            description,
+            latitude,
+            longitude,
+            raw_json,
+            ingested_at
+        )
+        VALUES (
+            %(event_id)s,
+            %(event_type)s,
+            %(location_id)s,
+            %(start_time)s,
+            %(impact_score)s,
+            %(duration_minutes)s,
+            %(confidence)s,
+            %(source)s,
+            %(description)s,
+            %(latitude)s,
+            %(longitude)s,
+            %(raw_json)s,
+            %(ingested_at)s
+        )
+        ON CONFLICT (event_id) DO UPDATE SET
+            event_type = EXCLUDED.event_type,
+            location_id = EXCLUDED.location_id,
+            start_time = EXCLUDED.start_time,
+            impact_score = EXCLUDED.impact_score,
+            duration_minutes = EXCLUDED.duration_minutes,
+            confidence = EXCLUDED.confidence,
+            source = EXCLUDED.source,
+            description = EXCLUDED.description,
+            latitude = EXCLUDED.latitude,
+            longitude = EXCLUDED.longitude,
+            raw_json = EXCLUDED.raw_json,
+            ingested_at = EXCLUDED.ingested_at
         """,
         {
-            "id": event.id,
+            "event_id": event.event_id,
+            "event_type": event.event_type,
+            "location_id": event.location_id,
+            "start_time": event.start_time,
+            "impact_score": event.impact_score,
+            "duration_minutes": event.duration_minutes,
+            "confidence": event.confidence,
             "source": event.source,
-            "category": event.category,
             "description": event.description,
-            "timestamp": event.timestamp,
             "latitude": event.latitude,
             "longitude": event.longitude,
-            "location_name": event.location_name,
-            "value": event.value,
             "raw_json": Jsonb(event.raw) if event.raw is not None else None,
             "ingested_at": datetime.now(timezone.utc),
         },
     )
+
     conn.commit()
 
 
-def recent_events(conn: psycopg.Connection, category: Optional[str] = None, limit: int = 20) -> list[dict]:
-    """Read events back out - the door the downstream agents use."""
-    if category:
+def recent_events(
+    conn: psycopg.Connection,
+    event_type: Optional[str] = None,
+    limit: int = 50,
+) -> list[dict]:
+    """
+    Read recent events back out.
+
+    These records can be passed directly into Agent 2's run_agent2().
+    """
+
+    if event_type:
         cur = conn.execute(
-            "SELECT * FROM events WHERE category = %s ORDER BY ingested_at DESC LIMIT %s",
-            (category, limit),
+            """
+            SELECT
+                event_id,
+                event_type,
+                location_id,
+                start_time,
+                impact_score,
+                duration_minutes,
+                confidence
+            FROM events
+            WHERE event_type = %s
+            ORDER BY ingested_at DESC
+            LIMIT %s
+            """,
+            (event_type, limit),
         )
     else:
         cur = conn.execute(
-            "SELECT * FROM events ORDER BY ingested_at DESC LIMIT %s",
+            """
+            SELECT
+                event_id,
+                event_type,
+                location_id,
+                start_time,
+                impact_score,
+                duration_minutes,
+                confidence
+            FROM events
+            ORDER BY ingested_at DESC
+            LIMIT %s
+            """,
             (limit,),
         )
+
+    return cur.fetchall()
+
+
+def recent_events_full(conn: psycopg.Connection, limit: int = 50) -> list[dict]:
+    """
+    Full version including metadata/raw payload.
+    Useful for debugging, frontend, or recommendations.
+    """
+
+    cur = conn.execute(
+        """
+        SELECT *
+        FROM events
+        ORDER BY ingested_at DESC
+        LIMIT %s
+        """,
+        (limit,),
+    )
+
     return cur.fetchall()
 
 
 if __name__ == "__main__":
-    # Needs a running Postgres (see Setup at the top). Then: python storage.py
     conn = init_db()
+
     demo = Event(
-        id="demo-1",
-        source="tfl_line",
-        category="transport",
-        description="Central line: minor delays",
-        timestamp=datetime.now(timezone.utc),
-        location_name="Central line",
-        value=9,
+        event_id="demo-roadworks-001",
+        event_type="roadworks",
+        location_id="camden_high_street",
+        start_time=datetime.now(timezone.utc),
+        impact_score=0.82,
+        duration_minutes=180,
+        confidence=0.88,
+        source="demo",
+        description="Demo roadworks on Camden High Street",
         raw={"example": True},
     )
+
     upsert_event(conn, demo)
-    upsert_event(conn, demo)  # second time updates the same row, does NOT duplicate
-    rows = recent_events(conn, category="transport")
-    print(f"rows in 'transport': {len(rows)}  (should be 1, not 2)")
-    print("stored description:", rows[0]["description"])
+    upsert_event(conn, demo)
+
+    rows = recent_events(conn)
+
+    print(f"rows in events: {len(rows)} (should be 1, not 2)")
+    print("stored event:", rows[0])
