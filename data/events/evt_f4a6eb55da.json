@@ -1,0 +1,285 @@
+{
+  "id": "evt_f4a6eb55da",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "road_disruption",
+  "timestamp": "2026-06-06T11:13:35.545794+00:00",
+  "location": "Liverpool Street",
+  "coordinates": {
+    "lat": 51.5178,
+    "lon": -0.0823
+  },
+  "severity": "medium",
+  "confidence": 0.92,
+  "summary": "Road disruption near Liverpool Street: Works. [A10] Gracechurch Street (Southbound) between Cornhill and Fenchurch Street - The road is restricted to facilitate building development works.",
+  "data": {
+    "match_method": "keyword_match",
+    "raw": {
+      "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+      "id": "TIMS-225605",
+      "url": "/Road/All/Disruption/TIMS-225605",
+      "point": "[-0.084551,51.512693]",
+      "severity": "Minimal",
+      "ordinal": 25,
+      "category": "Works",
+      "subCategory": "Collaborative works",
+      "comments": "[A10] Gracechurch Street (Southbound) between Cornhill and Fenchurch Street - The road is restricted to facilitate building development works.",
+      "currentUpdate": "Delays are possible. ",
+      "currentUpdateDateTime": "2026-05-28T14:29:05Z",
+      "corridorIds": [
+        "bishopsgate cross route"
+      ],
+      "startDateTime": "2026-03-14T08:00:00Z",
+      "endDateTime": "2028-02-21T07:00:00Z",
+      "lastModifiedTime": "2026-05-28T14:29:40Z",
+      "levelOfInterest": "Medium",
+      "location": "[A10] GRACECHURCH STREET (EC3V ,EC4N ,EC4R ) (City of London)",
+      "status": "Active",
+      "geography": {
+        "type": "Point",
+        "coordinates": [
+          -0.084551,
+          51.512693
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.0867395259,
+              51.5108744106
+            ],
+            [
+              -0.086667016,
+              51.5106827495
+            ],
+            [
+              -0.0865102411,
+              51.5105504766
+            ],
+            [
+              -0.0862876812,
+              51.5104622734
+            ],
+            [
+              -0.0860291622,
+              51.51042996
+            ],
+            [
+              -0.0857693283,
+              51.5104578668
+            ],
+            [
+              -0.0855840294,
+              51.5105213015
+            ],
+            [
+              -0.0850944756,
+              51.510857571
+            ],
+            [
+              -0.0847782702,
+              51.5113327428
+            ],
+            [
+              -0.0846257245,
+              51.5114611387
+            ],
+            [
+              -0.0843268552,
+              51.511888551
+            ],
+            [
+              -0.0842502408,
+              51.5121172279
+            ],
+            [
+              -0.0835398502,
+              51.5131143812
+            ],
+            [
+              -0.0835162911,
+              51.5132673379
+            ],
+            [
+              -0.0835630902,
+              51.5133959468
+            ],
+            [
+              -0.0836902009,
+              51.5135275589
+            ],
+            [
+              -0.0838505786,
+              51.5136134632
+            ],
+            [
+              -0.08411302,
+              51.5136761805
+            ],
+            [
+              -0.0843939508,
+              51.5136714587
+            ],
+            [
+              -0.0846506001,
+              51.5136000169
+            ],
+            [
+              -0.084843894,
+              51.5134727318
+            ],
+            [
+              -0.0855936451,
+              51.512445956
+            ],
+            [
+              -0.0857041889,
+              51.512166108
+            ],
+            [
+              -0.0858725432,
+              51.5119245802
+            ],
+            [
+              -0.0860304595,
+              51.5117911764
+            ],
+            [
+              -0.0863186582,
+              51.5113370575
+            ],
+            [
+              -0.0866581989,
+              51.5110868246
+            ],
+            [
+              -0.0867395259,
+              51.5108744106
+            ]
+          ]
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "streets": [
+        {
+          "$type": "Tfl.Api.Presentation.Entities.Street, Tfl.Api.Presentation.Entities",
+          "name": "[A10] GRACECHURCH STREET (EC3V ,EC4N ,EC4R )",
+          "closure": "Open",
+          "directions": "Both directions",
+          "segments": [
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.084376,51.513016],[-0.084419,51.512949]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.084984,51.512154],[-0.085093,51.511917]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085494,51.511431],[-0.085584,51.511286]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085185,51.511784],[-0.085382,51.511595]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.084663,51.512623],[-0.084728,51.512536]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085693,51.511108],[-0.086019,51.510879]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085601,51.511241],[-0.085693,51.511108]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085382,51.511595],[-0.085494,51.511431]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.084728,51.512536],[-0.084891,51.512323]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.084419,51.512949],[-0.084511,51.512826]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085093,51.511917],[-0.085185,51.511784]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.084891,51.512323],[-0.084984,51.512154]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.084511,51.512826],[-0.084663,51.512623]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.084138,51.513415],[-0.084376,51.513016]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.085584,51.511286],[-0.085601,51.511241]]",
+              "sourceSystemId": 0
+            }
+          ],
+          "sourceSystemId": 225605,
+          "sourceSystemKey": "TIMS"
+        }
+      ],
+      "isProvisional": false,
+      "hasClosures": false,
+      "roadDisruptionLines": [],
+      "roadDisruptionImpactAreas": [],
+      "recurringSchedules": []
+    }
+  },
+  "processed_by": []
+}

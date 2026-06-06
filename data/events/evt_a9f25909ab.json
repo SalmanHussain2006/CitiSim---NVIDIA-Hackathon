@@ -1,0 +1,158 @@
+{
+  "id": "evt_a9f25909ab",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "road_disruption",
+  "timestamp": "2026-06-06T11:13:35.546848+00:00",
+  "location": "Farringdon",
+  "coordinates": {
+    "lat": 51.5203,
+    "lon": -0.1053
+  },
+  "severity": "medium",
+  "confidence": 0.92,
+  "summary": "Road disruption near Farringdon: Works. [A201] London Road (Northbound) at the junction of [A3202] St Georges Circus - The road has been closed to facilitate burst water main repairs.",
+  "data": {
+    "match_method": "keyword_match",
+    "raw": {
+      "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+      "id": "TIMS-229428",
+      "url": "/Road/All/Disruption/TIMS-229428",
+      "point": "[-0.104251,51.498347]",
+      "severity": "Minimal",
+      "ordinal": 56,
+      "category": "Works",
+      "subCategory": "Utility works",
+      "comments": "[A201] London Road (Northbound) at the junction of [A3202] St Georges Circus - The road has been closed to facilitate burst water main repairs.",
+      "currentUpdate": "Seek other routes. Expect delays in the surrounding area.",
+      "currentUpdateDateTime": "2026-05-28T14:05:46Z",
+      "corridorIds": [
+        "farringdon cross route",
+        "inner ring"
+      ],
+      "startDateTime": "2026-05-28T13:00:00Z",
+      "endDateTime": "2026-06-02T18:00:00Z",
+      "lastModifiedTime": "2026-05-28T14:05:46Z",
+      "levelOfInterest": "Low",
+      "location": "[A201] LONDON ROAD (SE1 ) (Southwark)",
+      "status": "Active",
+      "geography": {
+        "type": "Point",
+        "coordinates": [
+          -0.104251,
+          51.498347
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.105072852,
+              51.4983272474
+            ],
+            [
+              -0.1050310525,
+              51.4981758167
+            ],
+            [
+              -0.10494704,
+              51.4980729117
+            ],
+            [
+              -0.1041129617,
+              51.4974382897
+            ],
+            [
+              -0.1039497923,
+              51.4973545008
+            ],
+            [
+              -0.1036853979,
+              51.497295227
+            ],
+            [
+              -0.1034047879,
+              51.4973036174
+            ],
+            [
+              -0.1031506819,
+              51.4973783949
+            ],
+            [
+              -0.1029617645,
+              51.4975081753
+            ],
+            [
+              -0.1028588744,
+              51.4977391363
+            ],
+            [
+              -0.102943477,
+              51.4979510483
+            ],
+            [
+              -0.1037956957,
+              51.4986113843
+            ],
+            [
+              -0.1039594565,
+              51.4987031111
+            ],
+            [
+              -0.1043232549,
+              51.4987757312
+            ],
+            [
+              -0.1046953769,
+              51.4987219962
+            ],
+            [
+              -0.1049711058,
+              51.4985570274
+            ],
+            [
+              -0.105072852,
+              51.4983272474
+            ]
+          ]
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "streets": [
+        {
+          "$type": "Tfl.Api.Presentation.Entities.Street, Tfl.Api.Presentation.Entities",
+          "name": "[A201] LONDON ROAD (SE1 )",
+          "closure": "Closed",
+          "directions": "Northbound",
+          "segments": [
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.104353,51.498327],[-0.103579,51.49774]]",
+              "sourceSystemId": 0
+            }
+          ],
+          "sourceSystemId": 229428,
+          "sourceSystemKey": "TIMS"
+        }
+      ],
+      "isProvisional": false,
+      "hasClosures": false,
+      "roadDisruptionLines": [],
+      "roadDisruptionImpactAreas": [],
+      "recurringSchedules": []
+    }
+  },
+  "processed_by": []
+}
