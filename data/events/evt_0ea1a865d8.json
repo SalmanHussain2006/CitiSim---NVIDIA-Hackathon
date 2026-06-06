@@ -1,0 +1,26 @@
+{
+  "id": "evt_0ea1a865d8",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "location_monitoring_snapshot",
+  "timestamp": "2026-06-06T11:38:13.663832+00:00",
+  "location": "Liverpool Street",
+  "coordinates": {
+    "lat": 51.5178,
+    "lon": -0.0823
+  },
+  "severity": "low",
+  "confidence": 1.0,
+  "summary": "Agent 1 is actively monitoring Liverpool Street.",
+  "data": {
+    "location_profile": {
+      "lat": 51.5178,
+      "lon": -0.0823,
+      "keywords": [
+        "liverpool street",
+        "bishopsgate",
+        "broadgate"
+      ]
+    }
+  },
+  "processed_by": []
+}

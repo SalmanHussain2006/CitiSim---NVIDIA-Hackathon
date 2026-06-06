@@ -1,0 +1,57 @@
+{
+  "id": "evt_5d9cbe9fea",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "road_disruption",
+  "timestamp": "2026-06-06T11:38:14.407134+00:00",
+  "location": "Bank",
+  "coordinates": {
+    "lat": 51.5133,
+    "lon": -0.089
+  },
+  "severity": "high",
+  "confidence": 0.92,
+  "summary": "Road disruption near Bank: Works. [A3217] Kings Road (All directions) at the junction of [A3220] Gunter Grove - Temporary signals in operation to facilitate works by UKPN.",
+  "data": {
+    "match_method": "keyword_match",
+    "distance_km": null,
+    "raw": {
+      "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+      "id": "TIMS-229214",
+      "url": "/Road/All/Disruption/TIMS-229214",
+      "point": "[-0.18328,51.481191]",
+      "severity": "Serious",
+      "ordinal": 2,
+      "category": "Works",
+      "subCategory": "Utility works",
+      "comments": "[A3217] Kings Road (All directions) at the junction of [A3220] Gunter Grove - Temporary signals in operation to facilitate works by UKPN.",
+      "currentUpdate": "Westbound traffic is subject to delays on the approach back to Oakley Street. Gunter Grove has slow moving northbound traffic tailing back intermittently to Cheyne Walk and there are additional delays back along Battersea Bridge and Chelsea Embankment.",
+      "currentUpdateDateTime": "2026-05-28T14:35:56Z",
+      "corridorIds": [],
+      "startDateTime": "2026-05-25T08:30:00Z",
+      "endDateTime": "2026-05-31T11:00:00Z",
+      "lastModifiedTime": "2026-05-28T14:35:56Z",
+      "levelOfInterest": "High",
+      "location": "[A3217] KINGS ROAD (SW10 ,SW3 ,SW6 ) (Hammersmith & Fulham,Kensington & Chelsea)",
+      "status": "Active",
+      "geography": {
+        "type": "Point",
+        "coordinates": [
+          -0.18328,
+          51.481191
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "isProvisional": false,
+      "hasClosures": false,
+      "roadDisruptionLines": [],
+      "roadDisruptionImpactAreas": [],
+      "recurringSchedules": []
+    }
+  },
+  "processed_by": []
+}

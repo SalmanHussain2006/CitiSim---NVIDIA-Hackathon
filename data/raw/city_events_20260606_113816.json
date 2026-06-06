@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Major City Event",
+    "location": "Bank",
+    "timestamp": "2026-06-06T11:38:16.433082+00:00",
+    "expected_attendance": 8000,
+    "category": "public_event"
+  },
+  {
+    "name": "Station Area Crowd Pressure",
+    "location": "Liverpool Street",
+    "timestamp": "2026-06-06T11:38:16.433082+00:00",
+    "expected_attendance": 5000,
+    "category": "transport_related"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "id": "evt_004cfc1003",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "footfall_signal",
+  "timestamp": "2026-06-06T11:38:16.432939+00:00",
+  "location": "Farringdon",
+  "coordinates": {
+    "lat": 51.5203,
+    "lon": -0.1053
+  },
+  "severity": "low",
+  "confidence": 0.8,
+  "summary": "Footfall at Farringdon is 1.07x baseline.",
+  "data": {
+    "location": "Farringdon",
+    "timestamp": "2026-06-06T11:38:16.427940+00:00",
+    "footfall_count": 10200,
+    "baseline": 9500
+  },
+  "processed_by": []
+}

@@ -1,0 +1,47 @@
+{
+  "id": "evt_2f82e8c291",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "transport_disruption_risk",
+  "timestamp": "2026-06-06T11:38:15.189972+00:00",
+  "location": "Moorgate",
+  "coordinates": {
+    "lat": 51.5186,
+    "lon": -0.0886
+  },
+  "severity": "medium",
+  "confidence": 0.72,
+  "summary": "District disruption may affect Moorgate: Part Closure. DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+  "data": {
+    "line": "District",
+    "status": {
+      "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+      "id": 0,
+      "lineId": "district",
+      "statusSeverity": 5,
+      "statusSeverityDescription": "Part Closure",
+      "reason": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+      "created": "0001-01-01T00:00:00",
+      "validityPeriods": [
+        {
+          "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+          "fromDate": "2026-06-06T03:30:00Z",
+          "toDate": "2026-06-08T00:29:00Z",
+          "isNow": false
+        }
+      ],
+      "disruption": {
+        "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+        "category": "PlannedWork",
+        "categoryDescription": "PlannedWork",
+        "description": "DISTRICT LINE: Saturday 6 and Sunday 7 June, no service between Turnham Green and Ealing Broadway. Replacement buses operate.",
+        "additionalInfo": "Replacement buses operate:Service PL1: Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park - Gunnersbury - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL4: Gunnersbury - Chiswick Park - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;\u00a0",
+        "created": "2026-05-20T18:04:00Z",
+        "affectedRoutes": [],
+        "affectedStops": [],
+        "closureText": "partClosure"
+      }
+    },
+    "note": "Line-level TfL disruption applied to monitored hubs."
+  },
+  "processed_by": []
+}

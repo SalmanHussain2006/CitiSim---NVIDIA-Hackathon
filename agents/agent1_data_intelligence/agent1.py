@@ -1,8 +1,14 @@
 import json
 import time
-import requests
 from pathlib import Path
 from datetime import datetime, timezone
+
+from connectors.tfl import pull_road_disruptions, pull_line_status
+from connectors.weather import pull_weather
+from connectors.air_quality import pull_air_quality_sites
+from connectors.footfall import pull_footfall
+from connectors.events import pull_city_events
+from connectors.planning import pull_planning_data
 
 from utils.event_schema import create_event
 from utils.location_matcher import (
@@ -27,35 +33,6 @@ def save_json(folder, name, data):
     path = folder / f"{name}_{ts()}.json"
     path.write_text(json.dumps(data, indent=2), encoding="utf-8")
     return path
-
-
-def get_json(url, params=None):
-    response = requests.get(url, params=params, timeout=30)
-    response.raise_for_status()
-    return response.json()
-
-
-def pull_tfl_roads():
-    return get_json("https://api.tfl.gov.uk/Road/All/Disruption")
-
-
-def pull_tfl_lines():
-    return get_json(
-        "https://api.tfl.gov.uk/Line/Mode/tube,dlr,elizabeth-line,overground/Status"
-    )
-
-
-def pull_weather():
-    return get_json(
-        "https://api.open-meteo.com/v1/forecast",
-        params={
-            "latitude": 51.5155,
-            "longitude": -0.0922,
-            "hourly": "temperature_2m,precipitation,rain,wind_speed_10m",
-            "forecast_days": 2,
-            "timezone": "Europe/London",
-        },
-    )
 
 
 def analyse_road_disruptions(items):
@@ -122,6 +99,7 @@ def analyse_transport_status(lines):
                             data={
                                 "line": line_name,
                                 "status": status,
+                                "note": "Line-level TfL disruption applied to monitored hubs.",
                             },
                         )
                     )
@@ -181,6 +159,112 @@ def analyse_weather(weather):
     return events
 
 
+def analyse_air_quality_sites(data):
+    # For now, this stores LAQN monitoring metadata as a low-severity intelligence event.
+    # Next upgrade: pull latest readings from selected stations and detect NO2 / PM2.5 alerts.
+    return [
+        create_event(
+            event_type="air_quality_monitoring_available",
+            location="City of London",
+            coordinates={"lat": 51.5155, "lon": -0.0922},
+            severity="low",
+            confidence=0.9,
+            summary="London air quality monitoring site metadata was ingested.",
+            data={"raw": data},
+        )
+    ]
+
+
+def analyse_footfall(items):
+    events = []
+
+    for item in items:
+        location = item.get("location")
+        count = item.get("footfall_count", 0)
+        baseline = item.get("baseline", 1)
+
+        if not location:
+            continue
+
+        ratio = count / baseline if baseline else 0
+
+        if ratio >= 1.25:
+            severity = "high"
+        elif ratio >= 1.1:
+            severity = "medium"
+        else:
+            severity = "low"
+
+        events.append(
+            create_event(
+                event_type="footfall_signal",
+                location=location,
+                coordinates=get_location_coordinates(location),
+                severity=severity,
+                confidence=0.8,
+                summary=f"Footfall at {location} is {round(ratio, 2)}x baseline.",
+                data=item,
+            )
+        )
+
+    return events
+
+
+def analyse_city_events(items):
+    events = []
+
+    for item in items:
+        location = item.get("location")
+        attendance = item.get("expected_attendance", 0)
+        name = item.get("name", "City event")
+
+        if not location:
+            continue
+
+        severity = "high" if attendance >= 7500 else "medium"
+
+        events.append(
+            create_event(
+                event_type="city_event_pressure",
+                location=location,
+                coordinates=get_location_coordinates(location),
+                severity=severity,
+                confidence=0.78,
+                summary=f"{name} may increase movement pressure around {location}.",
+                data=item,
+            )
+        )
+
+    return events
+
+
+def analyse_planning(items):
+    events = []
+
+    for item in items:
+        location = item.get("location")
+        impact = item.get("impact", "medium")
+        project_type = item.get("project_type", "planning_project")
+        description = item.get("description", "Planning or infrastructure activity detected.")
+
+        if not location:
+            continue
+
+        events.append(
+            create_event(
+                event_type="planning_infrastructure_signal",
+                location=location,
+                coordinates=get_location_coordinates(location),
+                severity=impact,
+                confidence=0.74,
+                summary=f"{project_type} near {location}: {description}",
+                data=item,
+            )
+        )
+
+    return events
+
+
 def monitoring_snapshots():
     events = []
 
@@ -209,7 +293,7 @@ def run_once():
     events.extend(monitoring_snapshots())
 
     try:
-        roads = pull_tfl_roads()
+        roads = pull_road_disruptions()
         save_json(RAW_DIR, "tfl_road_disruptions", roads)
         road_events = analyse_road_disruptions(roads)
         events.extend(road_events)
@@ -218,7 +302,7 @@ def run_once():
         print(f"Road API failed: {error}")
 
     try:
-        lines = pull_tfl_lines()
+        lines = pull_line_status()
         save_json(RAW_DIR, "tfl_line_status", lines)
         line_events = analyse_transport_status(lines)
         events.extend(line_events)
@@ -234,6 +318,42 @@ def run_once():
         print(f"Weather events: {len(weather_events)}")
     except Exception as error:
         print(f"Weather API failed: {error}")
+
+    try:
+        air_quality = pull_air_quality_sites()
+        save_json(RAW_DIR, "air_quality_sites", air_quality)
+        aq_events = analyse_air_quality_sites(air_quality)
+        events.extend(aq_events)
+        print(f"Air quality events: {len(aq_events)}")
+    except Exception as error:
+        print(f"Air quality API failed: {error}")
+
+    try:
+        footfall = pull_footfall()
+        save_json(RAW_DIR, "footfall", footfall)
+        footfall_events = analyse_footfall(footfall)
+        events.extend(footfall_events)
+        print(f"Footfall events: {len(footfall_events)}")
+    except Exception as error:
+        print(f"Footfall pull failed: {error}")
+
+    try:
+        city_events = pull_city_events()
+        save_json(RAW_DIR, "city_events", city_events)
+        city_event_signals = analyse_city_events(city_events)
+        events.extend(city_event_signals)
+        print(f"City event signals: {len(city_event_signals)}")
+    except Exception as error:
+        print(f"City events pull failed: {error}")
+
+    try:
+        planning = pull_planning_data()
+        save_json(RAW_DIR, "planning", planning)
+        planning_events = analyse_planning(planning)
+        events.extend(planning_events)
+        print(f"Planning events: {len(planning_events)}")
+    except Exception as error:
+        print(f"Planning pull failed: {error}")
 
     batch_path = save_json(EVENT_DIR, "agent1_events", events)
 

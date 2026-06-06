@@ -1,0 +1,47 @@
+{
+  "id": "evt_162fc32dfc",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "transport_disruption_risk",
+  "timestamp": "2026-06-06T11:38:15.190106+00:00",
+  "location": "Moorgate",
+  "coordinates": {
+    "lat": 51.5186,
+    "lon": -0.0886
+  },
+  "severity": "medium",
+  "confidence": 0.72,
+  "summary": "Piccadilly disruption may affect Moorgate: Part Closure. PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+  "data": {
+    "line": "Piccadilly",
+    "status": {
+      "$type": "Tfl.Api.Presentation.Entities.LineStatus, Tfl.Api.Presentation.Entities",
+      "id": 0,
+      "lineId": "piccadilly",
+      "statusSeverity": 5,
+      "statusSeverityDescription": "Part Closure",
+      "reason": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+      "created": "0001-01-01T00:00:00",
+      "validityPeriods": [
+        {
+          "$type": "Tfl.Api.Presentation.Entities.ValidityPeriod, Tfl.Api.Presentation.Entities",
+          "fromDate": "2026-06-05T23:45:00Z",
+          "toDate": "2026-06-08T00:29:00Z",
+          "isNow": false
+        }
+      ],
+      "disruption": {
+        "$type": "Tfl.Api.Presentation.Entities.Disruption, Tfl.Api.Presentation.Entities",
+        "category": "PlannedWork",
+        "categoryDescription": "PlannedWork",
+        "description": "PICCADILLY LINE: Saturday 6 June, from 0045, and all day Sunday 7 June, no service between Hammersmith and Heathrow (All Terminals) / Uxbridge, including Friday and Saturday Night Tube. Use METROPOLITAN LINE services between Rayners Lane and Uxbridge.",
+        "additionalInfo": "Replacement buses operateService PL1: (Day and Night Service): Hammersmith - Turnham Green (Chiswick High Road) - Chiswick Park (not night journeys) - Gunnersbury (not night journeys) - Acton Town - Ealing Common - Ealing Broadway - South Ealing - Northfields - Boston Manor - Osterley;Service PL3: (Day Service): Hammersmith - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3, and rail connections to Heathrow Terminals 4 and 5);Service PL4: (Day Service): Gunnersbury - Acton Town - Ealing Common - North Ealing - Hanger Lane (for Central line and Park Royal) - Alperton (Bridgewater Road) - Sudbury Town (Whitton Avenue East) - Sudbury Hill - South Harrow - Rayners Lane;Service PL7: (Day and Night Service): Hammersmith - Osterley - Hounslow East - Hounslow Central (Bell Corner) - Hounslow West - Hatton Cross - Heathrow Terminal 2 Bus Station (for Heathrow Terminals 2 and 3) - Heathrow Terminal 5;",
+        "created": "2026-05-20T18:13:00Z",
+        "affectedRoutes": [],
+        "affectedStops": [],
+        "closureText": "partClosure"
+      }
+    },
+    "note": "Line-level TfL disruption applied to monitored hubs."
+  },
+  "processed_by": []
+}

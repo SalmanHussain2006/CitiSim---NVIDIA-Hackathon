@@ -1,0 +1,232 @@
+{
+  "id": "evt_d100a2510f",
+  "source_agent": "agent_1_data_intelligence",
+  "event_type": "road_disruption",
+  "timestamp": "2026-06-06T11:38:14.409225+00:00",
+  "location": "Liverpool Street",
+  "coordinates": {
+    "lat": 51.5178,
+    "lon": -0.0823
+  },
+  "severity": "medium",
+  "confidence": 0.92,
+  "summary": "Road disruption near Liverpool Street: Works. King William Street (Southbound) at the junction of Lombard Street - Road closed to facilitate highway authority works.",
+  "data": {
+    "match_method": "keyword_match",
+    "distance_km": null,
+    "raw": {
+      "$type": "Tfl.Api.Presentation.Entities.RoadDisruption, Tfl.Api.Presentation.Entities",
+      "id": "TIMS-200007",
+      "url": "/Road/All/Disruption/TIMS-200007",
+      "point": "[-0.087718,51.512021]",
+      "severity": "Moderate",
+      "ordinal": 12,
+      "category": "Works",
+      "subCategory": "Borough works",
+      "comments": "King William Street (Southbound) at the junction of Lombard Street - Road closed to facilitate highway authority works.",
+      "currentUpdate": "Use an alternative route. Delays are possible on diversion.",
+      "currentUpdateDateTime": "2026-05-28T14:31:06Z",
+      "corridorIds": [
+        "bishopsgate cross route"
+      ],
+      "startDateTime": "2024-07-08T07:00:00Z",
+      "endDateTime": "2026-11-01T18:00:00Z",
+      "lastModifiedTime": "2026-05-28T14:31:24Z",
+      "levelOfInterest": "High",
+      "location": "KING WILLIAM STREET (EC3V,EC4N,EC4R) (City of London)",
+      "status": "Active",
+      "geography": {
+        "type": "Point",
+        "coordinates": [
+          -0.087718,
+          51.512021
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -0.0891778645,
+              51.5128805527
+            ],
+            [
+              -0.0890172242,
+              51.5125200354
+            ],
+            [
+              -0.0874801776,
+              51.5106900431
+            ],
+            [
+              -0.0872453036,
+              51.5105730268
+            ],
+            [
+              -0.0867677274,
+              51.51046977
+            ],
+            [
+              -0.0864870754,
+              51.510478646
+            ],
+            [
+              -0.0862053951,
+              51.5105674595
+            ],
+            [
+              -0.0860636998,
+              51.5106653138
+            ],
+            [
+              -0.0859642518,
+              51.5108058878
+            ],
+            [
+              -0.0859465127,
+              51.5109591496
+            ],
+            [
+              -0.0859981821,
+              51.5110870298
+            ],
+            [
+              -0.0861546639,
+              51.5112326769
+            ],
+            [
+              -0.08639087,
+              51.5113304629
+            ],
+            [
+              -0.0878833614,
+              51.5131507153
+            ],
+            [
+              -0.0880131221,
+              51.5132330795
+            ],
+            [
+              -0.0882300323,
+              51.5133058445
+            ],
+            [
+              -0.0884735516,
+              51.5133287601
+            ],
+            [
+              -0.0886565494,
+              51.5133113892
+            ],
+            [
+              -0.0888264081,
+              51.5132654908
+            ],
+            [
+              -0.0890132755,
+              51.5131654043
+            ],
+            [
+              -0.0891351782,
+              51.5130318883
+            ],
+            [
+              -0.0891778645,
+              51.5128805527
+            ]
+          ]
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "streets": [
+        {
+          "$type": "Tfl.Api.Presentation.Entities.Street, Tfl.Api.Presentation.Entities",
+          "name": "KING WILLIAM STREET (EC3V,EC4N,EC4R)",
+          "closure": "Closed",
+          "directions": "Southbound",
+          "segments": [
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.088143,51.51247],[-0.088264,51.512631]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.087512,51.511713],[-0.087758,51.512023]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.088403,51.512798],[-0.088458,51.512879]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.087758,51.512023],[-0.087868,51.51215]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.088264,51.512631],[-0.088403,51.512798]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.087375,51.511549],[-0.087512,51.511713]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.086923,51.510975],[-0.087155,51.511294]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.086923,51.510975],[-0.086663,51.510914]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.087155,51.511294],[-0.087375,51.511549]]",
+              "sourceSystemId": 0
+            },
+            {
+              "$type": "Tfl.Api.Presentation.Entities.StreetSegment, Tfl.Api.Presentation.Entities",
+              "toid": "0",
+              "lineString": "[[-0.087868,51.51215],[-0.088143,51.51247]]",
+              "sourceSystemId": 0
+            }
+          ],
+          "sourceSystemId": 200007,
+          "sourceSystemKey": "TIMS"
+        }
+      ],
+      "isProvisional": false,
+      "hasClosures": false,
+      "roadDisruptionLines": [],
+      "roadDisruptionImpactAreas": [],
+      "recurringSchedules": []
+    }
+  },
+  "processed_by": []
+}

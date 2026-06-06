@@ -1,0 +1,20 @@
+[
+  {
+    "location": "Liverpool Street",
+    "timestamp": "2026-06-06T11:38:16.427940+00:00",
+    "footfall_count": 18500,
+    "baseline": 14000
+  },
+  {
+    "location": "Farringdon",
+    "timestamp": "2026-06-06T11:38:16.427940+00:00",
+    "footfall_count": 10200,
+    "baseline": 9500
+  },
+  {
+    "location": "Bank",
+    "timestamp": "2026-06-06T11:38:16.427940+00:00",
+    "footfall_count": 16000,
+    "baseline": 12500
+  }
+]
