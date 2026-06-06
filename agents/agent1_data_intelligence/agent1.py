@@ -362,6 +362,11 @@ def run_once():
     batch_path = save_json(EVENT_DIR, "agent1_events", events)
 
     for event in events:
+        if "id" not in event:
+            print("MISSING ID EVENT:")
+            print(json.dumps(event, indent=2))
+            continue
+
         event_path = EVENT_DIR / f"{event['id']}.json"
         event_path.write_text(json.dumps(event, indent=2), encoding="utf-8")
 
@@ -420,4 +425,3 @@ def run_loop(minutes=5):
 
 if __name__ == "__main__":
     run_once()
-# testing
