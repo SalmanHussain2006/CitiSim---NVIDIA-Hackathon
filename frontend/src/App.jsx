@@ -99,7 +99,12 @@ function RecommendationCard({ recommendation }) {
 
   return (
     <div className={`rec priority-${recommendation.priority || "medium"}`}>
-      <strong>{recommendation.title || recommendation.action || "Operational recommendation"}</strong>
+      <strong>
+        {recommendation.title || recommendation.action || "Operational recommendation"}
+        {recommendation.generated_by === "nemotron" && (
+          <span className="nemotron-tag">Nemotron</span>
+        )}
+      </strong>
       {recommendation.action && <span>{recommendation.action}</span>}
     </div>
   );
@@ -458,6 +463,27 @@ export default function App() {
           ) : (
             <>
               <p className="summary">{simulation.summary}</p>
+
+              {simulation.evidence && (
+                <div className="evidence-strip">
+                  <div>
+                    <span>Evidence Events</span>
+                    <strong>{simulation.evidence.context_event_count}</strong>
+                  </div>
+                  <div>
+                    <span>Relationship Edges</span>
+                    <strong>{simulation.evidence.relationship_edges}</strong>
+                  </div>
+                  <div>
+                    <span>Forecast Points</span>
+                    <strong>{simulation.evidence.forecast_points}</strong>
+                  </div>
+                  <div>
+                    <span>Nemotron</span>
+                    <strong>{simulation.nemotron_used ? "Used" : "Offline"}</strong>
+                  </div>
+                </div>
+              )}
 
               {simulation.detected_factors?.length > 0 && (
                 <div className="factor-row">

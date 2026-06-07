@@ -3,11 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import json
 from pathlib import Path
+from datetime import datetime, timezone
 
 from agents.agent2_relationship_discovery.agent2 import run_agent2
 from agents.agent3_forecast_simulation.agent3 import run_agent3
 from agents.agent3_forecast_simulation.congestion_forecaster import adapt_agent_events
 from agents.agent4_recommendation.agent4 import generate_forecast_recommendations, generate_recommendations
+from agents.agent4_recommendation.agent4_nemotron import generate_nemotron_recommendations
 from agents.agent5_voice_operations.agent5 import (
     VoiceAgentError,
     recommendation_script,
@@ -85,6 +87,67 @@ def db_row_to_event(row):
     return event
 
 
+def parse_event_time(event):
+    value = event.get("start_time") or event.get("timestamp")
+    if isinstance(value, datetime):
+        return value
+    if isinstance(value, str):
+        try:
+            return datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            pass
+    return datetime.now(timezone.utc)
+
+
+def event_to_storage_event(event):
+    from storage import Event
+
+    severity_to_score = {
+        "low": 0.25,
+        "medium": 0.55,
+        "high": 0.85,
+        "critical": 1.0,
+    }
+    coordinates = event.get("coordinates") or {}
+    impact_score = event.get("impact_score")
+
+    if impact_score is None:
+        impact_score = severity_to_score.get(str(event.get("severity", "medium")).lower(), 0.55)
+
+    return Event(
+        event_id=event.get("event_id") or event.get("id"),
+        event_type=event.get("event_type", "unknown"),
+        location_id=event.get("location") or event.get("location_id", "unknown"),
+        start_time=parse_event_time(event),
+        impact_score=float(impact_score),
+        duration_minutes=int(event.get("duration_minutes", 60)),
+        confidence=float(event.get("confidence", 0.7)),
+        source=event.get("source_agent") or event.get("source", "agent1_data_intelligence"),
+        description=event.get("summary", ""),
+        latitude=coordinates.get("lat") or event.get("latitude"),
+        longitude=coordinates.get("lon") or event.get("longitude"),
+        raw=event,
+    )
+
+
+def seed_postgres_from_latest_json(conn, limit=500):
+    from storage import recent_events_full, upsert_event
+
+    data = latest_json("data/events", "agent1_events") or []
+    stored = 0
+
+    for event in data[:limit]:
+        if not event.get("event_id") and not event.get("id"):
+            continue
+        upsert_event(conn, event_to_storage_event(event))
+        stored += 1
+
+    if not stored:
+        return []
+
+    return recent_events_full(conn, limit=limit)
+
+
 def score_to_severity(score):
     try:
         score = float(score)
@@ -107,6 +170,8 @@ def load_current_events(limit=500):
         conn = init_db()
         try:
             rows = recent_events_full(conn, limit=limit)
+            if not rows:
+                rows = seed_postgres_from_latest_json(conn, limit=limit)
         finally:
             conn.close()
 
@@ -317,6 +382,31 @@ def scenario_recommendations(prompt, scenario, location, chart, timeline):
     return recommendations
 
 
+def evidence_summary(events, forecast_payload, relationship_graph):
+    event_types = {}
+    locations = {}
+    generated_sources = {}
+
+    for event in events:
+        event_type = event.get("event_type", "unknown")
+        location = event.get("location") or event.get("location_id") or "unknown"
+        source = event.get("source_agent") or event.get("source") or "unknown"
+        event_types[event_type] = event_types.get(event_type, 0) + 1
+        locations[location] = locations.get(location, 0) + 1
+        generated_sources[source] = generated_sources.get(source, 0) + 1
+
+    return {
+        "context_event_count": len(events),
+        "event_types": sorted(event_types.items(), key=lambda item: item[1], reverse=True)[:8],
+        "locations": sorted(locations.items(), key=lambda item: item[1], reverse=True)[:8],
+        "sources": sorted(generated_sources.items(), key=lambda item: item[1], reverse=True)[:8],
+        "relationship_edges": relationship_graph.get("metadata", {}).get("edge_count", 0),
+        "forecast_points": forecast_payload.get("metadata", {}).get("forecast_point_count", 0),
+        "forecast_model": forecast_payload.get("metadata", {}).get("model"),
+        "alerts": forecast_payload.get("alerts", [])[:5],
+    }
+
+
 def dedupe_recommendations(recommendations):
     deduped = []
     seen = set()
@@ -358,6 +448,73 @@ def impact_chart_from_forecast(forecast, location_id=None):
         {"factor": "Public Transport", "impact": avg("congestion_risk", 28)},
         {"factor": "Cycle Demand Drop", "impact": round(100 - avg("cycle_demand", 55))},
     ]
+
+
+def apply_scenario_chart_delta(chart, scenario):
+    deltas = {
+        "office_development": {
+            "Traffic": 18,
+            "Footfall": 34,
+            "Air Quality": 10,
+            "Public Transport": 12,
+            "Cycle Demand Drop": 8,
+        },
+        "station_disruption": {
+            "Traffic": 26,
+            "Footfall": 18,
+            "Air Quality": 8,
+            "Public Transport": 42,
+            "Cycle Demand Drop": 6,
+        },
+        "heavy_rain": {
+            "Traffic": 24,
+            "Footfall": 10,
+            "Air Quality": 14,
+            "Public Transport": 16,
+            "Cycle Demand Drop": 46,
+        },
+        "roadworks": {
+            "Traffic": 38,
+            "Footfall": 12,
+            "Air Quality": 20,
+            "Public Transport": 14,
+            "Cycle Demand Drop": 24,
+        },
+        "baseline": {},
+    }
+    scenario_delta = deltas.get(scenario, {})
+    adjusted = []
+
+    for item in chart:
+        factor = item["factor"]
+        impact = min(100, max(0, int(item["impact"]) + scenario_delta.get(factor, 0)))
+        adjusted.append({**item, "impact": impact, "baseline": item["impact"], "delta": scenario_delta.get(factor, 0)})
+
+    return adjusted
+
+
+def apply_scenario_timeline_delta(timeline, scenario):
+    deltas = {
+        "office_development": {"congestion": 16, "footfall": 32, "airQuality": 9, "cycleDemand": -8},
+        "station_disruption": {"congestion": 28, "footfall": -16, "airQuality": 7, "cycleDemand": -5},
+        "heavy_rain": {"congestion": 24, "footfall": -12, "airQuality": 12, "cycleDemand": -42},
+        "roadworks": {"congestion": 38, "footfall": -6, "airQuality": 18, "cycleDemand": -22},
+        "baseline": {},
+    }
+    scenario_delta = deltas.get(scenario, {})
+    if not scenario_delta:
+        return timeline
+
+    adjusted = []
+    for index, point in enumerate(timeline):
+        # Scenario effects ramp up, peak early, then taper so the lines are visibly scenario-specific.
+        multiplier = max(0.35, 1.0 - abs(index - 3) * 0.08)
+        row = dict(point)
+        for key, delta in scenario_delta.items():
+            row[key] = min(100, max(0, round(float(row.get(key, 0)) + delta * multiplier)))
+        adjusted.append(row)
+
+    return adjusted
 
 
 def timeline_from_forecast(forecast, location_id=None):
@@ -519,12 +676,15 @@ def simulate(req: SimulationRequest):
         relationship_graph=relationship_graph,
     )
 
-    chart = impact_chart_from_forecast(forecast_payload.get("forecast", []), location_id)
-    timeline = timeline_from_forecast(forecast_payload.get("forecast", []), location_id)
+    baseline_chart = impact_chart_from_forecast(forecast_payload.get("forecast", []), location_id)
+    baseline_timeline = timeline_from_forecast(forecast_payload.get("forecast", []), location_id)
+    chart = apply_scenario_chart_delta(baseline_chart, scenario)
+    timeline = apply_scenario_timeline_delta(baseline_timeline, scenario)
     top = max(chart, key=lambda x: x["impact"])
 
     recommendation_list = dedupe_recommendations(
-        scenario_recommendations(req.prompt, scenario, location, chart, timeline)
+        generate_nemotron_recommendations(context_events)
+        + scenario_recommendations(req.prompt, scenario, location, chart, timeline)
         + generate_recommendations(context_events)
         + generate_forecast_recommendations(forecast_payload)
     )
@@ -556,6 +716,15 @@ def simulate(req: SimulationRequest):
         "scenario": scenario,
         "detected_factors": list(dict.fromkeys(detected_factors)),
         "summary": f"Agent 3 predicts the highest simulated impact on {top['factor']} around {location}, using Agent 2 relationships and {len(context_events)} Agent 1 events.",
+        "evidence": evidence_summary(context_events, forecast_payload, relationship_graph),
+        "scenario_delta": {
+            "chart": chart,
+            "timeline_adjusted": scenario != "baseline",
+        },
+        "nemotron_used": any(
+            isinstance(rec, dict) and rec.get("generated_by") == "nemotron"
+            for rec in recommendation_list
+        ),
         "chart": chart,
         "timeline": timeline,
         "forecast": forecast_payload,

@@ -24,6 +24,9 @@ import os
 from typing import Any, Optional
 
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_URL = os.environ.get("NEMOTRON_BASE_URL", "http://localhost:11434/v1")
 MODEL = os.environ.get("NEMOTRON_MODEL", "nemotron-3-nano:30b")

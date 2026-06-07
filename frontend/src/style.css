@@ -505,6 +505,37 @@ button:disabled {
   font-size: 15px;
 }
 
+.evidence-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.evidence-strip div {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-soft);
+}
+
+.evidence-strip span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.evidence-strip strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.15;
+}
+
 .factor-row {
   display: flex;
   flex-wrap: wrap;
@@ -573,9 +604,25 @@ h3 {
 }
 
 .rec strong {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   color: var(--text);
   font-size: 14px;
   line-height: 1.35;
+}
+
+.nemotron-tag {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  border: 1px solid #acdcca;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .rec span {
@@ -634,7 +681,8 @@ h3 {
 
   .stats-row,
   .prompt-row,
-  .agent-grid {
+  .agent-grid,
+  .evidence-strip {
     grid-template-columns: 1fr;
   }
 

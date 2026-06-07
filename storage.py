@@ -19,8 +19,12 @@ from datetime import datetime, timezone
 from typing import Any, Optional
 
 import psycopg
+from dotenv import load_dotenv
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
+
+
+load_dotenv()
 
 
 DATABASE_URL = os.environ.get(
@@ -57,7 +61,7 @@ def init_db(dsn: str = DATABASE_URL) -> psycopg.Connection:
     Connect to Postgres and create the events table if needed.
     """
 
-    conn = psycopg.connect(dsn, row_factory=dict_row)
+    conn = psycopg.connect(dsn, row_factory=dict_row, connect_timeout=5)
 
     conn.execute(
         """
