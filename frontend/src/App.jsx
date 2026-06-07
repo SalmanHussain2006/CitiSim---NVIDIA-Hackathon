@@ -4,10 +4,10 @@ import "./style.css";
 const API = import.meta.env.VITE_API_URL || "";
 
 const PROMPT_CHIPS = [
-  "What happens if Oxford Circus gets pedestrianised?",
-  "Heavy rain hits Farringdon during evening peak",
-  "Bank station has a tube disruption",
-  "Roadworks close Camden High Street",
+  "Rain near Farringdon",
+  "Transport disruption at Bank",
+  "High footfall near Liverpool Street",
+  "Poor air quality near Moorgate",
 ];
 
 const METRIC_LINES = [
@@ -418,6 +418,15 @@ export default function App() {
 
   const totalEvents = events.length;
 
+  const highSeverityCount = useMemo(
+    () => events.filter((event) => event.severity === "high").length,
+    [events]
+  );
+
+  const locationCount = useMemo(() => {
+    return new Set(events.map(getEventLocation).filter(Boolean)).size;
+  }, [events]);
+
   const dataStatus = getDataStatus(dataSource);
   const scenarioTitle = simulation?.location || (prompt.trim() ? "Scenario results" : "No scenario selected yet");
   const hasScenarioActivity = loading || Boolean(simulation) || Boolean(searchMessage) || matchedEvents.length > 0;
@@ -668,15 +677,11 @@ export default function App() {
 
   return (
     <main>
-      <section className="workspace">
+      <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">DGX Spark city simulation</p>
+          <p className="eyebrow">Urban Operations Command Centre</p>
           <h1>CitiSim</h1>
-          <p>
-            Ask a what-if question. CitiSim ingests city signals, builds local
-            relationships, forecasts impacts, and returns a decision brief a planner
-            can act on tomorrow.
-          </p>
+          <p>Urban scenario intelligence for live city operations.</p>
         </div>
 
         <div className="scenario-console">
@@ -737,38 +742,12 @@ export default function App() {
         </div>
       </section>
 
-      <section className="system-story" aria-label="System workflow">
-        <div>
-          <span>1</span>
-          <strong>Ingest</strong>
-          <p>{totalEvents} city signals from transport, weather, planning, footfall, and air quality.</p>
-        </div>
-
-        <div>
-          <span>2</span>
-          <strong>Process Locally</strong>
-          <p>RAPIDS-style event normalization and graph discovery run on the Spark workflow.</p>
-        </div>
-
-        <div>
-          <span>3</span>
-          <strong>Forecast</strong>
-          <p>Scenario deltas are simulated across congestion, footfall, cycling, and air quality.</p>
-        </div>
-
-        <div>
-          <span>4</span>
-          <strong>Recommend</strong>
-          <p>{simulation?.nemotron_used ? "Local Nemotron reasoning is online." : "Rules and forecast evidence are ready; Nemotron appears offline."}</p>
-        </div>
-      </section>
-
       {hasScenarioActivity && (
         <section className="scenario-output">
-          <article className="decision-brief">
+          <article className="panel result-panel">
             <div className="panel-header">
               <div>
-                <span>Decision brief</span>
+                <span>Scenario result</span>
                 <h2>{scenarioTitle}</h2>
               </div>
             </div>
@@ -800,7 +779,7 @@ export default function App() {
 
                   <div>
                     <span>Advisor</span>
-                    <strong>{simulation.nemotron_used ? "Nemotron" : "Standard"}</strong>
+                    <strong>{simulation.nemotron_used ? "Online" : "Standard"}</strong>
                   </div>
                 </div>
 
@@ -818,7 +797,7 @@ export default function App() {
           {simulation && (
             <>
               <section className="charts-grid priority-charts">
-                <article className="chart-block">
+                <article className="panel chart-block">
                   <div className="chart-title">
                     <div>
                       <h2>Impact overview</h2>
@@ -840,7 +819,7 @@ export default function App() {
                   )}
                 </article>
 
-                <article className="chart-block">
+                <article className="panel chart-block">
                   <div className="chart-title">
                     <div>
                       <h2>Forecast timeline</h2>
@@ -863,7 +842,7 @@ export default function App() {
                 </article>
               </section>
 
-              <section className="actions-panel priority-actions">
+              <section className="panel actions-panel priority-actions">
                 <div className="panel-header">
                   <div>
                     <span>Recommended actions</span>
@@ -890,6 +869,50 @@ export default function App() {
           )}
         </section>
       )}
+
+      <section className="status-strip">
+        <span>{dataStatus}</span>
+        <span>{totalEvents} city signals</span>
+        <span>{locationCount} locations monitored</span>
+      </section>
+
+      <section className="stats-row" aria-label="Live city snapshot">
+        <article className="stat-card">
+          <span className="stat-dot cyan" />
+          <strong>{totalEvents}</strong>
+          <div>
+            <span>City signals</span>
+            <p>{dataStatus}</p>
+          </div>
+        </article>
+
+        <article className="stat-card">
+          <span className="stat-dot coral" />
+          <strong>{highSeverityCount}</strong>
+          <div>
+            <span>High priority</span>
+            <p>Needs attention</p>
+          </div>
+        </article>
+
+        <article className="stat-card">
+          <span className="stat-dot violet" />
+          <strong>{locationCount}</strong>
+          <div>
+            <span>Locations</span>
+            <p>Across the network</p>
+          </div>
+        </article>
+
+        <article className="stat-card">
+          <span className="stat-dot emerald" />
+          <strong>{matchedEvents.length}</strong>
+          <div>
+            <span>Matches</span>
+            <p>Search results</p>
+          </div>
+        </article>
+      </section>
 
       {loading && (
         <section className="loading-panel">
