@@ -147,23 +147,46 @@ def _to_agent4_shape(rec: Mapping) -> dict:
 
 
 def _fallback_text(events: list[Mapping], graph: dict) -> str:
-    event = events[0] if events else {}
+    event = max(
+        events,
+        key=lambda item: float(item.get("impact_score", 0) or 0),
+        default={},
+    )
     location = event.get("location") or event.get("location_id") or "City of London"
     event_type = event.get("event_type", "city signal")
     edge_count = graph.get("metadata", {}).get("edge_count", 0)
     summary = event.get("summary") or event.get("description") or f"{event_type} detected at {location}"
+    discovered = _top_discovered_edges(graph, limit=1)
+    relationship = ""
+
+    if discovered:
+        edge = discovered[0]
+        relationship = (
+            f" Agent 2 also found a {edge.get('relationship')} relationship between "
+            f"{edge.get('source')} and {edge.get('target')}."
+        )
 
     return (
         f"Title: Prioritise monitoring around {location}\n"
         f"Location: {location}\n"
         "Priority: medium\n"
         f"Action: Review live operations around {location}, because the current event context includes {event_type} "
-        "and the relationship graph can amplify impacts across nearby signals.\n"
+        f"and the relationship graph can amplify impacts across nearby signals.{relationship}\n"
         "Reasoning:\n"
         f"- Recent event evidence: {summary}\n"
         f"- Agent 2 produced {edge_count} relationship edges for this context.\n"
         "Predicted outcome: Earlier intervention should reduce congestion and crowding escalation."
     )
+
+
+def _usable_model_text(text: str) -> bool:
+    cleaned = " ".join(str(text or "").split()).lower()
+    if len(cleaned) < 80:
+        return False
+    bad_exact = {"deploy", "ok", "yes", "no", "none", "n/a"}
+    if cleaned in bad_exact:
+        return False
+    return any(term in cleaned for term in ["action", "reason", "recommend", "priority", "outcome", "location"])
 
 
 def generate_nemotron_recommendations(events: Iterable[Mapping], **chat_kwargs) -> list[dict]:
@@ -208,7 +231,7 @@ Evidence:
             max_tokens=500,
         ).strip()
 
-        if not text:
+        if not _usable_model_text(text):
             text = reason(
                 "You are a concise city operations analyst. Always return non-empty plain text.",
                 f"Write one practical city operations recommendation from this evidence:\n{briefing[:2500]}",
@@ -217,9 +240,9 @@ Evidence:
                 max_tokens=220,
             ).strip()
 
-        if not text:
+        if not _usable_model_text(text):
             print(
-                "Nemotron returned empty text twice. "
+                f"Nemotron returned unusable text ({text!r}). "
                 "Agent 4 is returning a local evidence-backed fallback recommendation instead."
             )
             text = _fallback_text(events, graph)
