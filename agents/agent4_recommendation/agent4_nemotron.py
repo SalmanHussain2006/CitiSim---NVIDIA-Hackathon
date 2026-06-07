@@ -186,7 +186,24 @@ def _usable_model_text(text: str) -> bool:
     bad_exact = {"deploy", "ok", "yes", "no", "none", "n/a"}
     if cleaned in bad_exact:
         return False
-    return any(term in cleaned for term in ["action", "reason", "recommend", "priority", "outcome", "location"])
+    useful_terms = [
+        "action",
+        "alert",
+        "coordinate",
+        "implement",
+        "location",
+        "monitor",
+        "outcome",
+        "passenger",
+        "priority",
+        "protocol",
+        "recommend",
+        "rerout",
+        "risk",
+        "station",
+        "transport",
+    ]
+    return any(term in cleaned for term in useful_terms)
 
 
 def generate_nemotron_recommendations(events: Iterable[Mapping], **chat_kwargs) -> list[dict]:
