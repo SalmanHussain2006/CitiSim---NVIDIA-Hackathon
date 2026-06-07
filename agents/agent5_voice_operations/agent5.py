@@ -33,6 +33,24 @@ def _headers():
     return {"xi-api-key": ELEVENLABS_API_KEY}
 
 
+def voice_config_status():
+    return {
+        "api_key_configured": bool(ELEVENLABS_API_KEY)
+        and ELEVENLABS_API_KEY not in {"ABCDEFGXYZ", "put_your_elevenlabs_api_key_here", "your_elevenlabs_api_key_here"},
+        "voice_id": DEFAULT_VOICE_ID,
+        "stt_model": DEFAULT_STT_MODEL,
+        "tts_model": DEFAULT_TTS_MODEL,
+    }
+
+
+def _response_error(response):
+    try:
+        payload = response.json()
+    except ValueError:
+        return response.text[:500]
+    return payload.get("detail") or payload.get("message") or str(payload)[:500]
+
+
 def transcribe_audio(audio_bytes, filename="voice.webm", content_type="audio/webm"):
     if not audio_bytes:
         raise VoiceAgentError("No audio was received.")
@@ -52,7 +70,10 @@ def transcribe_audio(audio_bytes, filename="voice.webm", content_type="audio/web
             files=files,
             timeout=45,
         )
-        response.raise_for_status()
+        if not response.ok:
+            raise VoiceAgentError(
+                f"ElevenLabs speech-to-text failed with {response.status_code}: {_response_error(response)}"
+            )
     except requests.RequestException as error:
         raise VoiceAgentError(f"ElevenLabs speech-to-text failed: {error}") from error
 
@@ -89,7 +110,10 @@ def synthesize_speech(text, voice_id=DEFAULT_VOICE_ID):
             json=payload,
             timeout=45,
         )
-        response.raise_for_status()
+        if not response.ok:
+            raise VoiceAgentError(
+                f"ElevenLabs text-to-speech failed with {response.status_code}: {_response_error(response)}"
+            )
     except requests.RequestException as error:
         raise VoiceAgentError(f"ElevenLabs text-to-speech failed: {error}") from error
 

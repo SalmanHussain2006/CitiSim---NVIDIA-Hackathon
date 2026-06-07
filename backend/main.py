@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, Form, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import json
@@ -15,6 +15,7 @@ from agents.agent5_voice_operations.agent5 import (
     recommendation_script,
     synthesize_speech,
     transcribe_audio,
+    voice_config_status,
 )
 
 app = FastAPI(title="CitiSim API")
@@ -657,6 +658,11 @@ def recommendations():
     return latest_json("data/recommendations") or {}
 
 
+@app.get("/voice/status")
+def voice_status():
+    return voice_config_status()
+
+
 @app.post("/simulate")
 def simulate(req: SimulationRequest):
     prompt = req.prompt.lower()
@@ -741,17 +747,23 @@ def simulate(req: SimulationRequest):
 @app.post("/voice/transcribe")
 async def voice_transcribe(audio: UploadFile = File(...)):
     audio_bytes = await audio.read()
-    transcript = transcribe_audio(
-        audio_bytes,
-        filename=audio.filename or "voice.webm",
-        content_type=audio.content_type or "audio/webm",
-    )
+    try:
+        transcript = transcribe_audio(
+            audio_bytes,
+            filename=audio.filename or "voice.webm",
+            content_type=audio.content_type or "audio/webm",
+        )
+    except VoiceAgentError as error:
+        raise HTTPException(status_code=502, detail=str(error)) from error
     return {"transcript": transcript}
 
 
 @app.post("/voice/speak")
 def voice_speak(req: SpeechRequest):
-    speech = synthesize_speech(req.text)
+    try:
+        speech = synthesize_speech(req.text)
+    except VoiceAgentError as error:
+        raise HTTPException(status_code=502, detail=str(error)) from error
     return {
         "text": speech.text,
         "audio_base64": speech.audio_base64,
@@ -777,7 +789,7 @@ async def voice_simulate(
         )
     except VoiceAgentError as error:
         if not fallback_prompt.strip():
-            raise
+            raise HTTPException(status_code=502, detail=str(error)) from error
         transcript = fallback_prompt.strip()
         warning = f"Voice transcription unavailable; used typed prompt instead. {error}"
 

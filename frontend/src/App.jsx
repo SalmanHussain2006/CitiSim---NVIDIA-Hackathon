@@ -110,6 +110,18 @@ function RecommendationCard({ recommendation }) {
   );
 }
 
+async function errorMessageFromResponse(res) {
+  const text = await res.text();
+  if (!text) return "Voice simulation failed.";
+
+  try {
+    const payload = JSON.parse(text);
+    return payload.detail || payload.message || text;
+  } catch {
+    return text;
+  }
+}
+
 export default function App() {
   const [prompt, setPrompt] = useState("");
   const [events, setEvents] = useState([]);
@@ -252,8 +264,7 @@ export default function App() {
       });
 
       if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(errorText || "Voice simulation failed.");
+        throw new Error(await errorMessageFromResponse(res));
       }
 
       const data = await res.json();
@@ -279,7 +290,7 @@ export default function App() {
     } catch (error) {
       console.error("Voice simulation failed:", error);
       setSearchMessage(
-        "Voice simulation failed. Check the FastAPI backend and ElevenLabs API key, or type the prompt and press Simulate."
+        `Voice simulation failed: ${error.message}. Type the prompt and press Simulate while Agent 5 is being fixed.`
       );
     } finally {
       setVoiceLoading(false);
