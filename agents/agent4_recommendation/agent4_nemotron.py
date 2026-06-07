@@ -146,6 +146,26 @@ def _to_agent4_shape(rec: Mapping) -> dict:
     }
 
 
+def _fallback_text(events: list[Mapping], graph: dict) -> str:
+    event = events[0] if events else {}
+    location = event.get("location") or event.get("location_id") or "City of London"
+    event_type = event.get("event_type", "city signal")
+    edge_count = graph.get("metadata", {}).get("edge_count", 0)
+    summary = event.get("summary") or event.get("description") or f"{event_type} detected at {location}"
+
+    return (
+        f"Title: Prioritise monitoring around {location}\n"
+        f"Location: {location}\n"
+        "Priority: medium\n"
+        f"Action: Review live operations around {location}, because the current event context includes {event_type} "
+        "and the relationship graph can amplify impacts across nearby signals.\n"
+        "Reasoning:\n"
+        f"- Recent event evidence: {summary}\n"
+        f"- Agent 2 produced {edge_count} relationship edges for this context.\n"
+        "Predicted outcome: Earlier intervention should reduce congestion and crowding escalation."
+    )
+
+
 def generate_nemotron_recommendations(events: Iterable[Mapping], **chat_kwargs) -> list[dict]:
     """Grounded Nemotron recommendations in Agent 4's format. Returns [] if Nemotron is down."""
     events = list(events)
@@ -189,8 +209,20 @@ Evidence:
         ).strip()
 
         if not text:
-            print("Nemotron returned empty text - skipping.")
-            return []
+            text = reason(
+                "You are a concise city operations analyst. Always return non-empty plain text.",
+                f"Write one practical city operations recommendation from this evidence:\n{briefing[:2500]}",
+                temperature=0.1,
+                top_p=0.9,
+                max_tokens=220,
+            ).strip()
+
+        if not text:
+            print(
+                "Nemotron returned empty text twice. "
+                "Agent 4 is returning a local evidence-backed fallback recommendation instead."
+            )
+            text = _fallback_text(events, graph)
 
         return [
             {

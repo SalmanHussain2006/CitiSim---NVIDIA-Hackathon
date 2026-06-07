@@ -84,7 +84,28 @@ def chat(
             f"Nemotron request failed against {BASE_URL}. Is the local server running? ({error})"
         ) from error
 
-    return response.json()["choices"][0]["message"]["content"]
+    payload = response.json()
+    choices = payload.get("choices") or []
+    if not choices:
+        return ""
+
+    choice = choices[0]
+    message = choice.get("message") or {}
+    content = message.get("content")
+
+    if isinstance(content, str):
+        return content
+
+    if isinstance(content, list):
+        parts = []
+        for item in content:
+            if isinstance(item, str):
+                parts.append(item)
+            elif isinstance(item, dict):
+                parts.append(item.get("text") or item.get("content") or "")
+        return "\n".join(part for part in parts if part)
+
+    return choice.get("text") or payload.get("response") or ""
 
 
 def reason(system_prompt: str, user_prompt: str, **kwargs) -> str:
