@@ -103,3 +103,10 @@ CitiPulse/
 ## License
 
 This project is distributed under the repository license in the `LICENSE` file.
+
+## Developers
+```text
+Salman Hussain
+Zachariah Zergoug
+Mohammad Sabur Ali Mahdi
+```
